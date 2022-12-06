@@ -333,7 +333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47763200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.61, y: -0.98, z: 0}
+  m_LocalPosition: {x: 11.07, y: 0.01, z: 0}
   m_LocalScale: {x: 2.8179562, y: 8.314004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 131381754}
   - component: {fileID: 131381753}
   - component: {fileID: 131381752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Static Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,7 +1019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793382139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.91, y: -1.09, z: 0}
+  m_LocalPosition: {x: -11.04, y: 0.2, z: 0}
   m_LocalScale: {x: 2.8179562, y: 8.314004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1119,9 +1119,9 @@ MonoBehaviour:
   groundCheck: {fileID: 1811834662}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  noFriction: {fileID: 0}
-  fullFriction: {fileID: 0}
+    m_Bits: 256
+  noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
+  fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
 --- !u!1 &967910461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d63311f880ad2664babf49416c9169fc, type: 3}
-  m_Color: {r: 1, g: 0.64945596, b: 0.3160377, a: 1}
+  m_Color: {r: 0.9245283, g: 0.31221926, b: 0.23113208, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1386,9 +1386,9 @@ MonoBehaviour:
   groundCheck: {fileID: 1297812007}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  noFriction: {fileID: 0}
-  fullFriction: {fileID: 0}
+    m_Bits: 256
+  noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
+  fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
 --- !u!1 &1297812006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1497,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d63311f880ad2664babf49416c9169fc, type: 3}
-  m_Color: {r: 1, g: 0.64945596, b: 0.3160377, a: 1}
+  m_Color: {r: 0.14640439, g: 0.8867924, b: 0.879465, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

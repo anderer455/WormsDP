@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Player_Jump"))
         {
             Jump();
         }

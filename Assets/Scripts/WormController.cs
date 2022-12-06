@@ -79,7 +79,7 @@ public class WormController : MonoBehaviour
             Flip();
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Worm_Jump"))
         {
             Jump();
         }
