@@ -197,7 +197,7 @@ public class WormController : MonoBehaviour
         }
     }   
 
-    private void ApplyMovement()
+    public void ApplyMovement()
     {
         if (isGrounded && !isOnSlope && !isJumping) //if not on slope
         {

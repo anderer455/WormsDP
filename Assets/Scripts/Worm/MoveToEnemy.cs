@@ -58,16 +58,16 @@ public class MoveToEnemy : Agent
         //AddReward(-1f / MaxStep);
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log("collided");
+    /*private void OnCollisionEnter2D(Collision2D collision) {
+        //Debug.Log("collided");
         if (collision.gameObject.TryGetComponent<Bottom>(out Bottom bottom)) {
             SetReward(-1f);
             EndEpisode();
         }
-    }
+    }*/
 
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log("triggered");
+    private void OnTriggerEnter2D(Collider2D other) {
+        //Debug.Log("triggered");
         if (other.TryGetComponent<Bottom>(out Bottom bottom)) {
             SetReward(-1f);
             EndEpisode();
