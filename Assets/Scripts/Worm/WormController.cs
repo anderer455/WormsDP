@@ -7,6 +7,12 @@ public class WormController : MonoBehaviour
 
     [SerializeField]
     private float movementSpeed;
+    public float MovementSpeed
+    {
+        get { return movementSpeed; }
+        set { movementSpeed = value; }
+    }
+
     [SerializeField]
     private float groundCheckRadius;
     [SerializeField]
@@ -85,6 +91,7 @@ public class WormController : MonoBehaviour
         }
 
     }
+
     private void CheckGround()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -177,7 +184,7 @@ public class WormController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         if (canJump)
         {
@@ -194,7 +201,6 @@ public class WormController : MonoBehaviour
     {
         if (isGrounded && !isOnSlope && !isJumping) //if not on slope
         {
-            Debug.Log("This one");
             newVelocity.Set(movementSpeed * xInput, 0.0f);
             rb.velocity = newVelocity;
         }
