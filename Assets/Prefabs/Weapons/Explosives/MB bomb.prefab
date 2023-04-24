@@ -15,13 +15,15 @@ GameObject:
   - component: {fileID: 4408120168122283613}
   - component: {fileID: 4408366136539624953}
   - component: {fileID: 4407904797756556579}
+  - component: {fileID: 1983564039051452332}
+  - component: {fileID: 2941681059016963453}
   m_Layer: 0
   m_Name: MB bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4374640698168567893
 Transform:
   m_ObjectHideFlags: 0
@@ -117,12 +119,12 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.01
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -197,3 +199,30 @@ MonoBehaviour:
   lifeMax: 1
   startColor: {r: 0, g: 0, b: 0, a: 0}
   startLocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &1983564039051452332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377112443233834671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26836af40d47e64fa681357adf6df5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceMultiplier: 1
+  projectilePrefab: {fileID: 2941681059016963453}
+--- !u!114 &2941681059016963453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377112443233834671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacae2a8ca6e1674dbd1cb12a2a176af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
