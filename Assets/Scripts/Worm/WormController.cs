@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CW.Common;
 
 public class WormController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class WormController : MonoBehaviour
     private bool isGrounded;
     private bool isOnSlope;
     private bool isJumping;
+    private bool isWalking;
     private bool canWalkOnSlope;
     private bool canJump;
 
@@ -52,6 +54,12 @@ public class WormController : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
 
+    //Animation
+    public GameObject wormGraphics;
+    public GameObject armGraphics;
+    private Animator wormAnimator;
+    private Animator armAnimator;
+
     //Weapon
     [SerializeField]
     public Weapon weapon;
@@ -59,10 +67,15 @@ public class WormController : MonoBehaviour
     private bool isMouseDown = false;
     public Camera mainCamera;
 
+    //Launch indicator
+    public GameObject indicator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
+        wormAnimator = wormGraphics.GetComponent<Animator>();
+        armAnimator = armGraphics.GetComponent<Animator>();
         capsuleColliderSize = cc.size;
     }
 
@@ -100,10 +113,21 @@ public class WormController : MonoBehaviour
                 weapon.SetSprite();
             }
 
+            if (isMouseDown == true) {
+                indicator.SetActive(true);
+                Vector2 currentMousePosition = GetWorldPosition();
+
+                var angle = CwHelper.Atan2(currentMousePosition - initialMousePosition) * Mathf.Rad2Deg;
+                var scale = Vector3.Distance(currentMousePosition, initialMousePosition)/2f;
+                indicator.transform.localScale = new Vector3(scale, scale, 0);
+                indicator.transform.rotation = Quaternion.Euler(0, 0, -angle);
+            }
+
             if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true) {
                 isMouseDown = false;
                 Vector2 currentMousePosition = GetWorldPosition();
                 weapon.ClearSprite();
+                indicator.SetActive(false);
                 weapon.Launch(initialMousePosition, currentMousePosition);
             }
         }
@@ -115,12 +139,18 @@ public class WormController : MonoBehaviour
 
         if(rb.velocity.y <= 0.0f) {
             isJumping = false;
+            wormAnimator.ResetTrigger("Worm Jump");
+            wormAnimator.SetTrigger("Worm Falling");
         }
 
         if(isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle) {
             canJump = true;
+            wormAnimator.ResetTrigger("Worm Falling");
+            if (!isWalking) {
+                wormAnimator.ResetTrigger("Worm Walking");
+                wormAnimator.SetTrigger("Worm Idle");
+            }
         }
-
     }
 
     private void SlopeCheck()
@@ -184,6 +214,9 @@ public class WormController : MonoBehaviour
         if (canJump) {
             canJump = false;
             isJumping = true;
+            if (wormAnimator != null) {
+                wormAnimator.SetTrigger("Worm Jump");
+            }
             newVelocity.Set(0.0f, 0.0f);
             rb.velocity = newVelocity;
             newForce.Set(0.0f, jumpForce);
@@ -196,15 +229,51 @@ public class WormController : MonoBehaviour
         if (isGrounded && !isOnSlope && !isJumping) { //if not on slope
             newVelocity.Set(movementSpeed * xInput, 0.0f);
             rb.velocity = newVelocity;
+            if (wormAnimator != null && newVelocity != Vector2.zero) {
+                if (!isWalking) {
+                    isWalking = true;
+                    wormAnimator.ResetTrigger("Worm Idle");
+                    wormAnimator.SetTrigger("Worm Walking");
+                    Debug.Log("Worm walking 1");
+                    if (armAnimator != null) {
+                        armAnimator.ResetTrigger("Arm Idle");
+                        armAnimator.SetTrigger("Arm Walking");
+                    }
+                }
+            } else {
+                isWalking = false;
+            }
         } else if (isGrounded && isOnSlope && canWalkOnSlope && !isJumping) { //If on slope
             newVelocity.Set(movementSpeed * slopeNormalPerp.x * -xInput, movementSpeed * slopeNormalPerp.y * -xInput);
             rb.velocity = newVelocity;
+            if (wormAnimator != null && newVelocity != Vector2.zero) {
+                if (!isWalking) {
+                    isWalking = true;
+                    wormAnimator.ResetTrigger("Worm Idle");
+                    wormAnimator.SetTrigger("Worm Walking");
+                    Debug.Log("Worm walking 1");
+                    if (armAnimator != null) {
+                        armAnimator.ResetTrigger("Arm Idle");
+                        armAnimator.SetTrigger("Arm Walking");
+                    }
+                }
+            } else {
+                isWalking = false;
+            }
         } else if (!isGrounded) { //If in air
             canJump = false;
             newVelocity.Set(movementSpeed * xInput, rb.velocity.y);
             rb.velocity = newVelocity;
+            if (wormAnimator != null) {
+                if (newVelocity.y > 0) {
+                    wormAnimator.SetTrigger("Worm Jumping");
+                    wormAnimator.ResetTrigger("Worm Falling");
+                } else if (newVelocity.y < 0) {
+                    wormAnimator.SetTrigger("Worm Falling");
+                    wormAnimator.ResetTrigger("Worm Jumping");
+                }
+            }
         }
-
     }
 
     private void Flip()
