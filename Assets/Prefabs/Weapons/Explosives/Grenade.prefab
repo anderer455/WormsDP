@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4408120168122283613}
   - component: {fileID: 4408366136539624953}
   - component: {fileID: 4407904797756556579}
-  - component: {fileID: 1983564039051452332}
   - component: {fileID: 2941681059016963453}
   m_Layer: 0
   m_Name: Grenade
@@ -199,21 +198,6 @@ MonoBehaviour:
   lifeMax: 1
   startColor: {r: 0, g: 0, b: 0, a: 0}
   startLocalScale: {x: 0, y: 0, z: 0}
---- !u!114 &1983564039051452332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4377112443233834671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d26836af40d47e64fa681357adf6df5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceMultiplier: 1
-  projectilePrefab: {fileID: 2941681059016963453}
-  launchingPosition: {fileID: 0}
 --- !u!114 &2941681059016963453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,3 +211,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  activeProjectile: 8

@@ -69,6 +69,8 @@ public class WormController : MonoBehaviour
 
     //Launch indicator
     public GameObject indicator;
+    private float maxDistance = 4f;
+    private float maxScale = 2f;
 
     private void Start()
     {
@@ -118,8 +120,13 @@ public class WormController : MonoBehaviour
                 Vector2 currentMousePosition = GetWorldPosition();
 
                 var angle = CwHelper.Atan2(currentMousePosition - initialMousePosition) * Mathf.Rad2Deg;
-                var scale = Vector3.Distance(currentMousePosition, initialMousePosition)/2f;
-                indicator.transform.localScale = new Vector3(scale, scale, 0);
+                var scale = Mathf.Clamp01(Vector3.Distance(currentMousePosition, initialMousePosition) / maxDistance) * maxScale;
+
+                if (scale > maxScale) {
+                    scale = maxScale;
+                }
+
+                indicator.transform.localScale = new Vector3(scale, scale, 1);
                 indicator.transform.rotation = Quaternion.Euler(0, 0, -angle);
             }
 
@@ -128,7 +135,14 @@ public class WormController : MonoBehaviour
                 Vector2 currentMousePosition = GetWorldPosition();
                 weapon.ClearSprite();
                 indicator.SetActive(false);
-                weapon.Launch(initialMousePosition, currentMousePosition);
+                Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
+                float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
+
+                if (distance > maxDistance) {
+                    distance = maxDistance;
+                }
+
+                weapon.Launch(direction, distance);
             }
         }
     }
@@ -234,7 +248,6 @@ public class WormController : MonoBehaviour
                     isWalking = true;
                     wormAnimator.ResetTrigger("Worm Idle");
                     wormAnimator.SetTrigger("Worm Walking");
-                    Debug.Log("Worm walking 1");
                     if (armAnimator != null) {
                         armAnimator.ResetTrigger("Arm Idle");
                         armAnimator.SetTrigger("Arm Walking");
@@ -251,7 +264,6 @@ public class WormController : MonoBehaviour
                     isWalking = true;
                     wormAnimator.ResetTrigger("Worm Idle");
                     wormAnimator.SetTrigger("Worm Walking");
-                    Debug.Log("Worm walking 1");
                     if (armAnimator != null) {
                         armAnimator.ResetTrigger("Arm Idle");
                         armAnimator.SetTrigger("Arm Walking");

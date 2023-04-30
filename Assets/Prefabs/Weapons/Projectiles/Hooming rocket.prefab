@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4407904797756556579}
   - component: {fileID: 2941681059016963453}
   m_Layer: 0
-  m_Name: Cluster bomb
+  m_Name: Hooming rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f10295a9aa2bd8b4baf9a2ba32f2fcbe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e790215aa55edb43b54615e7dc781fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,9 +103,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.335, y: 0.588}
-  m_Direction: 0
+  m_Offset: {x: -0.051222093, y: 0.0000000061061485}
+  m_Size: {x: 0.8124777, y: 0.47522467}
+  m_Direction: 1
 --- !u!50 &4326238932613862025
 Rigidbody2D:
   serializedVersion: 4
@@ -211,4 +211,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  activeProjectile: 6
+  activeProjectile: 4
