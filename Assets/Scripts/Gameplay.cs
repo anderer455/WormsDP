@@ -2,56 +2,54 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using URandom = UnityEngine.Random;
 
 public enum TeamColor { NEUTRAL, BLUE, RED, GREEN, YELLOW }
 public enum GameState { START, PLAYERTURN, CPUTURN, CPU2TURN, CPU3TURN, CPU4TURN, WON, LOST, END }
 
 public class Gameplay : MonoBehaviour
 {
-    private TeamColor activePlayer;
+    public static TeamColor activeTeam;
 
-    public GameObject playerPrefab;
-	public GameObject enemyPrefab;
+    private List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW };
+    private int currentTeamIndex;
 
-	Worm playerUnit;
-	Worm enemyUnit;
+    private float turnDuration = 60f;
+    private float turnTimer;
+	public static int turnTimerSeconds;
 
-	public GameState state;
-
-    // Start is called before the first frame update
     void Start()
     {
-		state = GameState.START;
-		System.Random random = new System.Random();
-		Type type = typeof(TeamColor);
-		Array values = type.GetEnumValues();
-		int index = random.Next(values.Length);
-		activePlayer = (TeamColor)values.GetValue(index);
-		
-		if (activePlayer == TeamColor.NEUTRAL)
-		{
-			disableEnemyWorm();
-		}
-		else
-		{
-			disablePlayerWorm();
-		}
-		//StartCoroutine();
+        turnTimer = turnDuration;
+		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
+        currentTeamIndex = URandom.Range(0, validTeamColors.Count);
+        activeTeam = validTeamColors[currentTeamIndex];
+        StartTurn();
     }
 
-	void Update()
-	{
-		if (activePlayer == TeamColor.NEUTRAL)
-		{
-			activePlayer = TeamColor.BLUE;
-		}
-		else
-		{
-			activePlayer = TeamColor.NEUTRAL;
-		}
-	}
+    void Update()
+    {
+        turnTimer -= Time.deltaTime;
+		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
 
-	void disableEnemyWorm() {}
-	void disablePlayerWorm() {}
+        if (turnTimer <= 0)
+        {
+            EndTurn();
+        }
+
+        // Here you can implement team actions based on the active team
+    }
+
+    void StartTurn()
+    {
+        turnTimer = turnDuration;
+    }
+
+    void EndTurn()
+    {
+        currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
+        activeTeam = validTeamColors[currentTeamIndex];
+
+        StartTurn();
+    }
 }
