@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4407904797756556579}
   - component: {fileID: 2941681059016963453}
   m_Layer: 0
-  m_Name: Hooming rocket
+  m_Name: Homing rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

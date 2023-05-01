@@ -57,6 +57,7 @@ public class WormController : MonoBehaviour
     //Animation
     public GameObject wormGraphics;
     public GameObject armGraphics;
+    public GameObject weaponGraphics;
     private Animator wormAnimator;
     private Animator armAnimator;
 
@@ -66,6 +67,8 @@ public class WormController : MonoBehaviour
     private Vector2 initialMousePosition;
     private bool isMouseDown = false;
     public Camera mainCamera;
+    public static WeaponType activeWeapon = WeaponType.ROCKETLAUNCHER;
+    public static ProjectileType activeProjectile = ProjectileType.ROCKET;
 
     //Launch indicator
     public GameObject indicator;
@@ -95,7 +98,7 @@ public class WormController : MonoBehaviour
 
     private void CheckInput()
     {
-        if (!PauseMenu.isPaused) {
+        if (!PauseMenu.isPaused && !InventoryMenu.isOpened) {
             xInput = Input.GetAxisRaw("Worm_Move");
 
             if (xInput == 1 && facingDirection == -1) {
@@ -127,7 +130,20 @@ public class WormController : MonoBehaviour
                 }
 
                 indicator.transform.localScale = new Vector3(scale, scale, 1);
-                indicator.transform.rotation = Quaternion.Euler(0, 0, -angle);
+                indicator.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -angle);
+
+                if (((currentMousePosition.x < initialMousePosition.x) && facingDirection == 1) || ((currentMousePosition.x > initialMousePosition.x) && facingDirection == -1)) {
+                    Flip();
+                    armGraphics.transform.rotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, -(angle+90));
+                } else {
+                    armGraphics.transform.rotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, -(angle-90));
+                }
+                
+                if (facingDirection == -1) {
+                    weaponGraphics.transform.localRotation = Quaternion.Euler(180.0f, 0.0f, 0.0f);
+                } else if (facingDirection == 1){
+                    weaponGraphics.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                }
             }
 
             if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true) {
@@ -142,7 +158,9 @@ public class WormController : MonoBehaviour
                     distance = maxDistance;
                 }
 
-                weapon.Launch(direction, distance);
+                weapon.Launch(direction, distance, maxDistance, activeProjectile);
+                armGraphics.transform.localRotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, 0.0f);
+                weaponGraphics.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
         }
     }
@@ -153,16 +171,29 @@ public class WormController : MonoBehaviour
 
         if(rb.velocity.y <= 0.0f) {
             isJumping = false;
-            wormAnimator.ResetTrigger("Worm Jump");
-            wormAnimator.SetTrigger("Worm Falling");
+            
+            if (wormAnimator != null) {
+                wormAnimator.ResetTrigger("Worm Jump");
+                wormAnimator.SetTrigger("Worm Falling");
+            }
         }
 
         if(isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle) {
             canJump = true;
-            wormAnimator.ResetTrigger("Worm Falling");
+            
+            if (wormAnimator != null) {
+                wormAnimator.ResetTrigger("Worm Falling");
+            }
+
             if (!isWalking) {
-                wormAnimator.ResetTrigger("Worm Walking");
-                wormAnimator.SetTrigger("Worm Idle");
+                if (wormAnimator != null) {
+                    wormAnimator.ResetTrigger("Worm Walking");
+                    wormAnimator.SetTrigger("Worm Idle");
+                }
+                if (armAnimator != null) {
+                    armAnimator.ResetTrigger("Arm Walking");
+                    armAnimator.SetTrigger("Arm Idle");
+                }
             }
         }
     }
@@ -298,7 +329,7 @@ public class WormController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
-
+ 
     private Vector2 GetWorldPosition()
     {
         Vector2 screenPosition = Input.mousePosition;
