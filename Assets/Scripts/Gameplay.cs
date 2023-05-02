@@ -11,19 +11,19 @@ public class Gameplay : MonoBehaviour
 {
     public static TeamColor activeTeam;
 
-    private List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW };
+    public static List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.RED, TeamColor.GREEN, TeamColor.YELLOW };
     private int currentTeamIndex;
 
     private float turnDuration = 60f;
     private float turnTimer;
 	public static int turnTimerSeconds;
 
+    private int randomSign;
+
     void Start()
     {
-        turnTimer = turnDuration;
-		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
-        currentTeamIndex = URandom.Range(0, validTeamColors.Count);
-        activeTeam = validTeamColors[currentTeamIndex];
+        currentTeamIndex = -1;
+        //currentTeamIndex = URandom.Range(-1, validTeamColors.Count-1);
         StartTurn();
     }
 
@@ -43,13 +43,26 @@ public class Gameplay : MonoBehaviour
     void StartTurn()
     {
         turnTimer = turnDuration;
+		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
+        currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
+        activeTeam = validTeamColors[currentTeamIndex];
     }
 
     void EndTurn()
     {
-        currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
-        activeTeam = validTeamColors[currentTeamIndex];
-
         StartTurn();
+    }
+
+    public void EpisodeBegin(Transform subject, Transform targetTransform)
+    {
+        randomSign = URandom.Range(0, 2) * 2 - 1;
+
+        if (randomSign == -1) {
+            subject.localPosition = new Vector3(URandom.Range(-17f, 0f), 8.2f, 0f);
+            targetTransform.localPosition = new Vector3(URandom.Range(0f, 17.5f), 8.2f, 0f);
+        } else {
+            subject.localPosition = new Vector3(URandom.Range(0f, 17.5f), 8.2f, 0f);
+            targetTransform.localPosition = new Vector3(URandom.Range(-17f, 0f), 8.2f, 0f);
+        }
     }
 }

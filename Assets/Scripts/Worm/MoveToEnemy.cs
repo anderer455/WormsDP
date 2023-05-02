@@ -9,18 +9,10 @@ public class MoveToEnemy : Agent
 {
     [SerializeField] private Transform targetTransform;
     private WormController wormController;
-    private int randomSign;
+    [SerializeField] private Gameplay gameplayInstance;
 
     public override void OnEpisodeBegin() {
-        randomSign = Random.Range(0, 2) * 2 - 1;
-
-        if (randomSign == -1) {
-            transform.localPosition = new Vector3(Random.Range(-17f, 0f), 8.2f, 0f);
-            targetTransform.localPosition = new Vector3(Random.Range(0f, 17.5f), 8.2f, 0f);
-        } else {
-            transform.localPosition = new Vector3(Random.Range(0f, 17.5f), 8.2f, 0f);
-            targetTransform.localPosition = new Vector3(Random.Range(-17f, 0f), 8.2f, 0f);
-        }
+        gameplayInstance.EpisodeBegin(transform, targetTransform);
     }
 
     public override void CollectObservations(VectorSensor sensor) {
@@ -40,7 +32,7 @@ public class MoveToEnemy : Agent
                 wormController.Jump();
             }
             float movementSpeed = wormController.MovementSpeed;
-            transform.localPosition += new Vector3(moveX, 0, 0) * Time.deltaTime * movementSpeed;
+            wormController.MyFixedUpdate(moveX);
         }
 
         float distance2 = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
@@ -67,7 +59,6 @@ public class MoveToEnemy : Agent
     }*/
 
     private void OnTriggerEnter2D(Collider2D other) {
-        //Debug.Log("triggered");
         if (other.TryGetComponent<Bottom>(out Bottom bottom)) {
             SetReward(-1f);
             EndEpisode();

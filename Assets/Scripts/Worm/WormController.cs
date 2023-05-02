@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CW.Common;
+using URandom = UnityEngine.Random;
 
 public class WormController : MonoBehaviour
 {
-
     [SerializeField]
     private float movementSpeed;
     public float MovementSpeed
@@ -13,6 +13,7 @@ public class WormController : MonoBehaviour
         get { return movementSpeed; }
         set { movementSpeed = value; }
     }
+    public TeamColor teamColor;
 
     [SerializeField]
     private float groundCheckRadius;
@@ -82,18 +83,34 @@ public class WormController : MonoBehaviour
         wormAnimator = wormGraphics.GetComponent<Animator>();
         armAnimator = armGraphics.GetComponent<Animator>();
         capsuleColliderSize = cc.size;
+        teamColor = Gameplay.validTeamColors[0];
+        //teamColor = Gameplay.validTeamColors[URandom.Range(0, Gameplay.validTeamColors.Count)];
     }
 
     private void Update()
     {
-        CheckInput();     
+        MyUpdate();
     }
 
     private void FixedUpdate()
     {
-        CheckGround();
-        SlopeCheck();
-        ApplyMovement();
+        MyFixedUpdate(xInput);
+    }
+
+    public void MyUpdate()
+    {
+        if (Gameplay.activeTeam == teamColor) {
+            CheckInput();
+        }
+    }
+
+    public void MyFixedUpdate(float xAxisInput)
+    {
+        if (Gameplay.activeTeam == teamColor) {
+            CheckGround();
+            SlopeCheck();
+            ApplyMovement(xAxisInput);
+        }
     }
 
     private void CheckInput()
@@ -269,10 +286,10 @@ public class WormController : MonoBehaviour
         }
     }   
 
-    public void ApplyMovement()
+    public void ApplyMovement(float xAxisInput)
     {
         if (isGrounded && !isOnSlope && !isJumping) { //if not on slope
-            newVelocity.Set(movementSpeed * xInput, 0.0f);
+            newVelocity.Set(movementSpeed * xAxisInput, 0.0f);
             rb.velocity = newVelocity;
             if (wormAnimator != null && newVelocity != Vector2.zero) {
                 if (!isWalking) {
@@ -288,7 +305,7 @@ public class WormController : MonoBehaviour
                 isWalking = false;
             }
         } else if (isGrounded && isOnSlope && canWalkOnSlope && !isJumping) { //If on slope
-            newVelocity.Set(movementSpeed * slopeNormalPerp.x * -xInput, movementSpeed * slopeNormalPerp.y * -xInput);
+            newVelocity.Set(movementSpeed * slopeNormalPerp.x * -xAxisInput, movementSpeed * slopeNormalPerp.y * -xAxisInput);
             rb.velocity = newVelocity;
             if (wormAnimator != null && newVelocity != Vector2.zero) {
                 if (!isWalking) {
@@ -305,7 +322,7 @@ public class WormController : MonoBehaviour
             }
         } else if (!isGrounded) { //If in air
             canJump = false;
-            newVelocity.Set(movementSpeed * xInput, rb.velocity.y);
+            newVelocity.Set(movementSpeed * xAxisInput, rb.velocity.y);
             rb.velocity = newVelocity;
             if (wormAnimator != null) {
                 if (newVelocity.y > 0) {

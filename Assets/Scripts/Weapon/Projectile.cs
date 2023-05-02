@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     public ProjectileType activeProjectile;
     private Rigidbody2D rb;
+    private float angle;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +38,6 @@ public class Projectile : MonoBehaviour
             case ProjectileType.MBBOMB:
             case ProjectileType.MINE:
             case ProjectileType.BANANA:
-                float angle;
-
                 if (rb.velocity.x < 0) {
                     angle = 120f;
                 } else if (rb.velocity.x > 0) {
@@ -55,12 +54,16 @@ public class Projectile : MonoBehaviour
                 if (rb.velocity.x < 0 && transform.eulerAngles.y != 180f) {
                     transform.Rotate(0f, 180f, 0f);
                 }
+                angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 break;
             case ProjectileType.BULLET:
             case ProjectileType.BUCKSHOT:
                 if (rb.velocity.x < 0 && transform.eulerAngles.y != 180f) {
                     transform.Rotate(0f, 180f, 0f);
                 }
+                angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
                 break;
             default:
                 break;
