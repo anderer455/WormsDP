@@ -7,17 +7,27 @@ using Unity.MLAgents.Sensors;
 
 public class MoveToEnemy : Agent
 {
-    [SerializeField] private Transform targetTransform;
+    [SerializeField] private Player enemy;
     private WormController wormController;
     [SerializeField] private Gameplay gameplayInstance;
 
+    private GameObject[] subjects;
+    private GameObject[] enemies;
+
     public override void OnEpisodeBegin() {
-        gameplayInstance.EpisodeBegin(transform, targetTransform);
+        gameplayInstance.EpisodeBegin(transform, enemy.transform);
     }
 
     public override void CollectObservations(VectorSensor sensor) {
-        sensor.AddObservation(transform.localPosition);
-        sensor.AddObservation(targetTransform.localPosition);
+        GetAllWorms();
+        
+        foreach (GameObject obj in subjects) {
+            sensor.AddObservation(obj.transform.localPosition);
+        }
+
+        foreach (GameObject obj in enemies) {
+            sensor.AddObservation(obj.transform.localPosition);
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions) {
@@ -25,7 +35,7 @@ public class MoveToEnemy : Agent
         float jump = actions.DiscreteActions[0];
 
         wormController = GetComponent<WormController>();
-        float distance1 = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+        float distance1 = Vector3.Distance(transform.localPosition, enemies[0].transform.localPosition);
 
         if (wormController != null) {
             if (jump == 1) {
@@ -35,7 +45,7 @@ public class MoveToEnemy : Agent
             wormController.MyFixedUpdate(moveX);
         }
 
-        float distance2 = Vector3.Distance(transform.localPosition, targetTransform.localPosition);
+        float distance2 = Vector3.Distance(transform.localPosition, enemies[0].transform.localPosition);
 
         if (distance2 <= 1f) {
             AddReward(+1f);
@@ -63,6 +73,11 @@ public class MoveToEnemy : Agent
             SetReward(-1f);
             EndEpisode();
         }
+    }
+
+    private void GetAllWorms() {
+        subjects = gameplayInstance.GetPlayerWorms(transform);
+        enemies = gameplayInstance.GetPlayerWorms(enemy.transform);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {

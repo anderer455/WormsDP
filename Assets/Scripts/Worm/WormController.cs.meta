@@ -5,8 +5,14 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - groundCheck: {instanceID: 0}
-  - noFriction: {fileID: 6200000, guid: a4bdca4b67f40e44b92cd2769f40204e, type: 2}
-  - fullFriction: {fileID: 6200000, guid: fafd4a3d7955c2f4f913bd7db1e32678, type: 2}
+  - noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
+  - fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
+  - wormGraphics: {instanceID: 0}
+  - armGraphics: {instanceID: 0}
+  - weaponGraphics: {instanceID: 0}
+  - weapon: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - indicator: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

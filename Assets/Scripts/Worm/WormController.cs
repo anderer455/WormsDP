@@ -37,7 +37,7 @@ public class WormController : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
 
-    private int facingDirection = 1;
+    private int facingDirection;
 
     private bool isGrounded;
     private bool isOnSlope;
@@ -81,14 +81,7 @@ public class WormController : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CapsuleCollider2D>();
-        wormAnimator = wormGraphics.GetComponent<Animator>();
-        armAnimator = armGraphics.GetComponent<Animator>();
-        capsuleColliderSize = cc.size;
-        pointOfLaunch = transform.Find("Arm Graphics/Point Of Launch");
-        teamColor = Gameplay.validTeamColors[0];
-        //teamColor = Gameplay.validTeamColors[URandom.Range(0, Gameplay.validTeamColors.Count)];
+        InitializeWorm();
     }
 
     private void Update()
@@ -115,6 +108,21 @@ public class WormController : MonoBehaviour
             SlopeCheck();
             ApplyMovement(xAxisInput);
         }
+    }
+
+    private void InitializeWorm() {
+        rb = GetComponent<Rigidbody2D>();
+        cc = GetComponent<CapsuleCollider2D>();
+        wormAnimator = wormGraphics.GetComponent<Animator>();
+        armAnimator = armGraphics.GetComponent<Animator>();
+        capsuleColliderSize = cc.size;
+        pointOfLaunch = transform.Find("Arm Graphics/Point Of Launch");
+        facingDirection = URandom.Range(0f, 1f) < 0.5f ? -1 : 1;
+        if (facingDirection == -1) {
+            facingDirection = 1;
+            Flip();
+        }
+        teamColor = Gameplay.validTeamColors[0];
     }
 
     private void CheckInput()
@@ -386,4 +394,3 @@ public class WormController : MonoBehaviour
         return worldPosition;
     }
 }
-

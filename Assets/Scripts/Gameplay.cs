@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using URandom = UnityEngine.Random;
 
-public enum TeamColor { BLUE, YELLOW }
+public enum TeamColor { NEUTRAL, BLUE, YELLOW }
 public enum GameMode { PVP, PVC, CVC }
 public enum GameDifficulty { EASY, MEDIUM, HARD }
 public enum GameState { START, PLAYERTURN, CPUTURN, CPU2TURN, WON, LOST, END }
@@ -48,8 +48,7 @@ public class Gameplay : MonoBehaviour
 
     private float turnDuration = 60f;
     private static float turnTimer;
-    public static float TurnTimer
-    {
+    public static float TurnTimer {
         get { return turnTimer; }
         set { turnTimer = value; }
     }
@@ -57,22 +56,19 @@ public class Gameplay : MonoBehaviour
 
     private int randomSign;
 
-    void Start()
-    {
+    void Start() {
         SetGameStateAtStart();
         SetGameMap();
 
         StartTurn();
     }
 
-    void Update()
-    {
+    void Update() {
         CheckGameEnd();
         turnTimer -= Time.deltaTime;
 		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
 
-        if (turnTimer <= 0)
-        {
+        if (turnTimer <= 0) {
             EndTurn();
         }
 
@@ -107,52 +103,48 @@ public class Gameplay : MonoBehaviour
     void SetGameMap() {
         GameObject mapObject = GameObject.Find("Map");
 
-        if (mapObject != null)
-        {
+        if (mapObject != null) {
             switch (activeMap) {
-            case GameMap.CASTLE:
-                Instantiate(castlePrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.CHEESE:
-                Instantiate(cheesePrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.DONKEY:
-                Instantiate(donkeyPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.JUNGLE:
-                Instantiate(junglePrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.LABORATORY:
-                Instantiate(laboratoryPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.MARS:
-                Instantiate(marsPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.TANK:
-                Instantiate(tankPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.TERRAIN:
-                Instantiate(terrainPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.WINDMILL:
-                Instantiate(windmillPrefab, mapObject.transform.position, Quaternion.identity);
-                break;
-            case GameMap.NONE:
-            default:
-                Map[] myMaps = { castlePrefab, cheesePrefab, donkeyPrefab, junglePrefab, laboratoryPrefab, marsPrefab, tankPrefab, terrainPrefab, windmillPrefab };
-                int randomMap = URandom.Range(0, myMaps.Length);
-                Instantiate(myMaps[randomMap], mapObject.transform.position, Quaternion.identity);
-                break;
+                case GameMap.CASTLE:
+                    Instantiate(castlePrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.CHEESE:
+                    Instantiate(cheesePrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.DONKEY:
+                    Instantiate(donkeyPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.JUNGLE:
+                    Instantiate(junglePrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.LABORATORY:
+                    Instantiate(laboratoryPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.MARS:
+                    Instantiate(marsPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.TANK:
+                    Instantiate(tankPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.TERRAIN:
+                    Instantiate(terrainPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.WINDMILL:
+                    Instantiate(windmillPrefab, mapObject.transform.position, Quaternion.identity);
+                    break;
+                case GameMap.NONE:
+                default:
+                    Map[] myMaps = { castlePrefab, cheesePrefab, donkeyPrefab, junglePrefab, laboratoryPrefab, marsPrefab, tankPrefab, terrainPrefab, windmillPrefab };
+                    int randomMap = URandom.Range(0, myMaps.Length);
+                    Instantiate(myMaps[randomMap], mapObject.transform.position, Quaternion.identity);
+                    break;
             }
-        }
-        else
-        {
+        } else {
             Debug.LogError("Object not found");
         }
     }
 
-    void StartTurn()
-    {
+    void StartTurn() {
         turnTimer = turnDuration;
 		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
         currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
@@ -180,22 +172,34 @@ public class Gameplay : MonoBehaviour
         }
     }
 
-    void EndTurn()
-    {
+    void EndTurn() {
         StartTurn();
     }
 
-    public void EpisodeBegin(Transform subject, Transform targetTransform)
-    {
+    public void EpisodeBegin(Transform subject, Transform enemy) {
         randomSign = URandom.Range(0, 2) * 2 - 1;
 
+        GameObject[] subjects = GetPlayerWorms(subject);
+        GameObject[] enemies = GetPlayerWorms(enemy);
+
         if (randomSign == -1) {
-            subject.localPosition = new Vector3(URandom.Range(-17f, 0f), 8.2f, 0f);
-            targetTransform.localPosition = new Vector3(URandom.Range(0f, 17.5f), 8.2f, 0f);
+            //subjects[0].localPosition = new Vector3(URandom.Range(-17f, 0f), 10f, 0f);
+            //enemies[0].localPosition = new Vector3(URandom.Range(0f, 17.5f), 10f, 0f);
         } else {
-            subject.localPosition = new Vector3(URandom.Range(0f, 17.5f), 8.2f, 0f);
-            targetTransform.localPosition = new Vector3(URandom.Range(-17f, 0f), 8.2f, 0f);
+            //subjects[0].localPosition = new Vector3(URandom.Range(0f, 17.5f), 10f, 0f);
+            //enemies[0].localPosition = new Vector3(URandom.Range(-17f, 0f), 10f, 0f);
         }
+    }
+
+    public GameObject[] GetPlayerWorms(Transform player) {
+        int wormsCount = player.transform.childCount;
+        GameObject[] worms = new GameObject[wormsCount];
+
+        for (int i = 0; i < wormsCount; i++) {
+            worms[i] = player.transform.GetChild(i).gameObject;
+        }
+
+        return worms;
     }
 
     void CheckGameEnd() {
