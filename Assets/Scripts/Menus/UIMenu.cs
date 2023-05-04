@@ -19,16 +19,16 @@ public class UIMenu : MonoBehaviour
     void Update()
     {
         timerText.text = Gameplay.turnTimerSeconds.ToString();
-        switch (Gameplay.activeTeam) {
+        switch (Gameplay.activeTeamColor) {
             case TeamColor.BLUE:
                 image.color = Color.blue;
-                break;
+                break;/*
             case TeamColor.RED:
                 image.color = Color.red;
                 break;
             case TeamColor.GREEN:
                 image.color = Color.green;
-                break;
+                break;*/
             case TeamColor.YELLOW:
                 image.color = Color.yellow;
                 break;
