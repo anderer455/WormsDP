@@ -3,7 +3,22 @@ guid: d26836af40d47e64fa681357adf6df5d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rocketPrefab: {fileID: 2941681059016963453, guid: 33a0cbafe0e080540a2773bb129f1b02, type: 3}
+  - bulletPrefab: {fileID: 2941681059016963453, guid: b1407f36a08e1554ab72609923ebbe3b, type: 3}
+  - buckshotPrefab: {fileID: 2941681059016963453, guid: a138146af2e27cf42ab9b919eeb04f94, type: 3}
+  - rocketBluePrefab: {fileID: 2941681059016963453, guid: d2b61c949abf13440ba379385c740530, type: 3}
+  - homingRocketPrefab: {fileID: 2941681059016963453, guid: ac4f4c17a3fdd88488bda67f9d6ecccc, type: 3}
+  - c4Prefab: {fileID: 2941681059016963453, guid: 1d35f21b4d8245a4aa12f85306cde598, type: 3}
+  - grenadePrefab: {fileID: 2941681059016963453, guid: c8c6b7e2fcf594144ac88f9d0387a80e, type: 3}
+  - clusterBombPrefab: {fileID: 2941681059016963453, guid: 3a20fbfc4413cee47ab7d40e4094e095, type: 3}
+  - dynamitePrefab: {fileID: 2941681059016963453, guid: 878b79eeee7fcb4498c93a7890e55f58, type: 3}
+  - holyGrenadePrefab: {fileID: 2941681059016963453, guid: 4620b9d8ae142f541a1183b377f8b9b0, type: 3}
+  - homingClusterBombPrefab: {fileID: 2941681059016963453, guid: 92c530d268ddafb41b985601918b4219, type: 3}
+  - mbbombPrefab: {fileID: 2941681059016963453, guid: db0976bf725695948b7d7315c0c9328c, type: 3}
+  - minePrefab: {fileID: 2941681059016963453, guid: cdf6c1c44cb48604ca157f3f223976b4, type: 3}
+  - bananaPrefab: {fileID: 2941681059016963453, guid: 9d8bee51d3e9a84439e68d8209ddc0c4, type: 3}
+  - launchingPosition: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

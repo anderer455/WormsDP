@@ -189,5 +189,7 @@ public class Weapon : MonoBehaviour
         {
             rb.AddForce(direction * force);
         }
+
+        Gameplay.TurnTimer = 5f;
     }
 }
