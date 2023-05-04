@@ -66,14 +66,17 @@ public class WormController : MonoBehaviour
     [SerializeField]
     public Weapon weapon;
     private Vector2 initialMousePosition;
-    private bool isMouseDown = false;
+    public bool isMouseDown = false;
     public Camera mainCamera;
     public static WeaponType activeWeapon = WeaponType.ROCKETLAUNCHER;
     public static ProjectileType activeProjectile = ProjectileType.ROCKET;
+    private Transform pointOfLaunch;
 
     //Launch indicator
     public GameObject indicator;
     private float maxDistance = 4f;
+    private float minDistance = 0.1f;
+    private float minDistanceUp = 0.4f;
     private float maxScale = 2f;
 
     private void Start()
@@ -83,6 +86,7 @@ public class WormController : MonoBehaviour
         wormAnimator = wormGraphics.GetComponent<Animator>();
         armAnimator = armGraphics.GetComponent<Animator>();
         capsuleColliderSize = cc.size;
+        pointOfLaunch = transform.Find("Arm Graphics/Point Of Launch");
         teamColor = Gameplay.validTeamColors[0];
         //teamColor = Gameplay.validTeamColors[URandom.Range(0, Gameplay.validTeamColors.Count)];
     }
@@ -99,14 +103,14 @@ public class WormController : MonoBehaviour
 
     public void MyUpdate()
     {
-        if (Gameplay.activeTeam == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor) {
             CheckInput();
         }
     }
 
     public void MyFixedUpdate(float xAxisInput)
     {
-        if (Gameplay.activeTeam == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor) {
             CheckGround();
             SlopeCheck();
             ApplyMovement(xAxisInput);
@@ -116,12 +120,18 @@ public class WormController : MonoBehaviour
     private void CheckInput()
     {
         if (!PauseMenu.isPaused && !InventoryMenu.isOpened) {
+            if (Input.GetMouseButtonDown(1)) {
+                if (isMouseDown == true) {
+                    StopLaunching();
+                }
+            }
+
             xInput = Input.GetAxisRaw("Worm_Move");
 
-            if (xInput == 1 && facingDirection == -1) {
+            if (xInput == 1 && facingDirection == -1 && isMouseDown != true) {
                 Flip();
             }
-            else if (xInput == -1 && facingDirection == 1) {
+            else if (xInput == -1 && facingDirection == 1 && isMouseDown != true) {
                 Flip();
             }
 
@@ -146,6 +156,8 @@ public class WormController : MonoBehaviour
                     scale = maxScale;
                 }
 
+                
+                indicator.transform.position = pointOfLaunch.position;
                 indicator.transform.localScale = new Vector3(scale, scale, 1);
                 indicator.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -angle);
 
@@ -158,28 +170,46 @@ public class WormController : MonoBehaviour
                 
                 if (facingDirection == -1) {
                     weaponGraphics.transform.localRotation = Quaternion.Euler(180.0f, 0.0f, 0.0f);
-                } else if (facingDirection == 1){
+                } else if (facingDirection == 1) {
                     weaponGraphics.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 }
             }
 
             if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true) {
-                isMouseDown = false;
-                Vector2 currentMousePosition = GetWorldPosition();
-                weapon.ClearSprite();
-                indicator.SetActive(false);
-                Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
-                float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
-
-                if (distance > maxDistance) {
-                    distance = maxDistance;
-                }
-
-                weapon.Launch(direction, distance, maxDistance, activeProjectile);
-                armGraphics.transform.localRotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, 0.0f);
-                weaponGraphics.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                Launching();
             }
         }
+    }
+
+    public void Launching() {
+        Vector2 currentMousePosition = GetWorldPosition();
+        Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
+        float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
+
+        if (direction == Vector2.zero) {
+            direction = Vector2.up;
+        }
+
+        if (distance < minDistance) {
+            if (direction == Vector2.up) {
+                distance = minDistanceUp;
+            } else {
+                distance = minDistance;
+            }
+        } else if (distance > maxDistance) {
+            distance = maxDistance;
+        }
+
+        weapon.Launch(direction, distance, maxDistance, activeProjectile);
+        StopLaunching();
+    }
+
+    void StopLaunching() {
+        isMouseDown = false;
+        weapon.ClearSprite();
+        indicator.SetActive(false);
+        armGraphics.transform.localRotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, 0.0f);
+        weaponGraphics.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
     }
 
     private void CheckGround()
@@ -273,16 +303,18 @@ public class WormController : MonoBehaviour
 
     public void Jump()
     {
-        if (canJump) {
-            canJump = false;
-            isJumping = true;
-            if (wormAnimator != null) {
-                wormAnimator.SetTrigger("Worm Jump");
+        if (Gameplay.activeTeamColor == teamColor) {
+            if (canJump) {
+                canJump = false;
+                isJumping = true;
+                if (wormAnimator != null) {
+                    wormAnimator.SetTrigger("Worm Jump");
+                }
+                newVelocity.Set(0.0f, 0.0f);
+                rb.velocity = newVelocity;
+                newForce.Set(0.0f, jumpForce);
+                rb.AddForce(newForce, ForceMode2D.Impulse);
             }
-            newVelocity.Set(0.0f, 0.0f);
-            rb.velocity = newVelocity;
-            newForce.Set(0.0f, jumpForce);
-            rb.AddForce(newForce, ForceMode2D.Impulse);
         }
     }   
 
