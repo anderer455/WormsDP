@@ -3,7 +3,16 @@ guid: bb5c858d08e358442bec312d1a1c2df9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - castlePrefab: {fileID: -216032215775433404, guid: 7ad15e8b362a06a45996fac9af6b95db, type: 3}
+  - cheesePrefab: {fileID: 3807206736290703003, guid: ce3840979be7293489938d1de9807bf6, type: 3}
+  - donkeyPrefab: {fileID: 1642135733524467425, guid: c083cd9ca129a8645b35946c75ddf01d, type: 3}
+  - junglePrefab: {fileID: 377239739993993247, guid: 9e7849576cea7ea4b82e2fd8649d835f, type: 3}
+  - laboratoryPrefab: {fileID: 2907602906058532706, guid: bf481ab8ad739a24aa6d377897283fec, type: 3}
+  - marsPrefab: {fileID: -1385454205420204056, guid: 36e4f45332a3b544a9aa873e566a9711, type: 3}
+  - tankPrefab: {fileID: 2344636480374972127, guid: adde0a2532e94564c99bc7c7626c8b39, type: 3}
+  - terrainPrefab: {fileID: -3804894039590034541, guid: 40888027c4c4d9e4bbb8243691a332f1, type: 3}
+  - windmillPrefab: {fileID: -6962250439257233289, guid: 9d687843e2df0464792bcd6fc2b65929, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
