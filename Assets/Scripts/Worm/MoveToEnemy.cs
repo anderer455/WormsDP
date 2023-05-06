@@ -15,7 +15,7 @@ public class MoveToEnemy : Agent
     private GameObject[] enemies;
 
     public override void OnEpisodeBegin() {
-        gameplayInstance.EpisodeBegin(transform, enemy.transform);
+        gameplayInstance.EpisodeBegin(transform.parent, enemy.transform);
     }
 
     public override void CollectObservations(VectorSensor sensor) {
@@ -76,7 +76,7 @@ public class MoveToEnemy : Agent
     }
 
     private void GetAllWorms() {
-        subjects = gameplayInstance.GetPlayerWorms(transform);
+        subjects = gameplayInstance.GetPlayerWorms(transform.parent);
         enemies = gameplayInstance.GetPlayerWorms(enemy.transform);
     }
 
