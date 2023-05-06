@@ -69,4 +69,16 @@ public class Projectile : MonoBehaviour
                 break;
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.TryGetComponent<Bottom>(out Bottom bottom)) {
+            Destroy(this.gameObject);
+        } else if (collision.gameObject.TryGetComponent<WormController>(out WormController worm)) {
+            worm.TakeDamage(damage);
+            Destroy(this.gameObject);
+        } else if (collision.gameObject.TryGetComponent<PlayerController>(out PlayerController playerWorm)) {
+            playerWorm.TakeDamage(damage);
+            Destroy(this.gameObject);
+        }
+    }
 }

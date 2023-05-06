@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CW.Common;
 using URandom = UnityEngine.Random;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
         set { movementSpeed = value; }
     }
     public TeamColor teamColor;
+    private int health = 100;
 
     [SerializeField]
     private float groundCheckRadius;
@@ -195,7 +197,8 @@ public class PlayerController : MonoBehaviour
         float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
 
         if (direction == Vector2.zero) {
-            direction = Vector2.up;
+            StopLaunching();
+            return;
         }
 
         if (distance < minDistance) {
@@ -208,11 +211,11 @@ public class PlayerController : MonoBehaviour
             distance = maxDistance;
         }
 
-        weapon.Launch(direction, distance, maxDistance, activeProjectile);
+        weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
         StopLaunching();
     }
 
-    void StopLaunching() {
+    public void StopLaunching() {
         isMouseDown = false;
         weapon.ClearSprite();
         indicator.SetActive(false);
@@ -380,6 +383,11 @@ public class PlayerController : MonoBehaviour
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+        transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
     }
 
     private void OnDrawGizmos()

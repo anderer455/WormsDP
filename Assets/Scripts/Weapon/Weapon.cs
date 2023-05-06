@@ -40,6 +40,7 @@ public class Weapon : MonoBehaviour
     private Transform launchingPosition;
 
     private Projectile projectilePrefab;
+    private float launchDelay = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +63,15 @@ public class Weapon : MonoBehaviour
         }
 
         Sprite newSprite;
+        WeaponType activeWeapon;
 
-        switch (WormController.activeWeapon)
+        if (Gameplay.activeTeamColor == TeamColor.BLUE) {
+            activeWeapon = WormController.activeWeapon;
+        } else {
+            activeWeapon = PlayerController.activeWeapon;
+        }
+
+        switch (activeWeapon)
         {
             case WeaponType.ROCKETLAUNCHER:
                 newSprite = Resources.Load<Sprite>("Sprites/Weapons/Rocket launcher");
@@ -128,8 +136,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Launch(Vector2 direction, float distance, float maxDistance, ProjectileType projectileType)
-    {
+    public void Launch(Vector2 direction, float distance, float maxDistance, ProjectileType projectileType, WeaponType weaponType) {
         float force = distance * forceMultiplier;
 
         switch (projectileType)
@@ -183,13 +190,41 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
-        GameObject projectile = Instantiate(projectilePrefab, launchingPosition.position, Quaternion.identity).gameObject;
-        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.AddForce(direction * force);
+        if (Gameplay.TurnTimer > 5f) {
+            Gameplay.TurnTimer = 5f;
         }
 
-        Gameplay.TurnTimer = 5f;
+        if (weaponType == WeaponType.UZI) {
+            StartCoroutine(LaunchMultipleProjectiles(direction, force));
+        } else {
+            LaunchSingleProjectile(direction, force);
+        }
+
+        if (Gameplay.activeTeamColor == TeamColor.BLUE) {
+            WormController.activeWeapon = WeaponType.ROCKETLAUNCHER;
+            WormController.activeProjectile = ProjectileType.ROCKET;
+        } else {
+            PlayerController.activeWeapon = WeaponType.ROCKETLAUNCHER;
+            PlayerController.activeProjectile = ProjectileType.ROCKET;
+        }
+    }
+
+    private void LaunchSingleProjectile(Vector2 direction, float force) {
+        GameObject projectile = Instantiate(projectilePrefab, launchingPosition.position, Quaternion.identity).gameObject;
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        if (rb != null) {
+            rb.AddForce(direction * force);
+        }
+    }
+
+    private IEnumerator LaunchMultipleProjectiles(Vector2 direction, float force) {
+        for (int i = 0; i < 3; i++) {
+            GameObject projectile = Instantiate(projectilePrefab, launchingPosition.position, Quaternion.identity).gameObject;
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            if (rb != null) {
+                rb.AddForce(direction * force);
+            }
+            yield return new WaitForSeconds(launchDelay);
+        }
     }
 }

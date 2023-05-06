@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CW.Common;
 using URandom = UnityEngine.Random;
+using TMPro;
 
 public class WormController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class WormController : MonoBehaviour
         set { movementSpeed = value; }
     }
     public TeamColor teamColor;
+    private int health = 100;
 
     [SerializeField]
     private float groundCheckRadius;
@@ -78,6 +80,7 @@ public class WormController : MonoBehaviour
     private float minDistance = 0.1f;
     private float minDistanceUp = 0.4f;
     private float maxScale = 2f;
+    public static bool canLaunch = true;
 
     private void Start()
     {
@@ -147,13 +150,17 @@ public class WormController : MonoBehaviour
                 Jump();
             }
 
-            if ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && isMouseDown == false) {
+            if ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && isMouseDown == false && canLaunch == true) {
                 isMouseDown = true;
                 initialMousePosition = GetWorldPosition();
                 weapon.SetSprite();
             }
 
             if (isMouseDown == true) {
+                if (Gameplay.TurnTimer <= 0) {
+                    StopLaunching();
+                }
+
                 indicator.SetActive(true);
                 Vector2 currentMousePosition = GetWorldPosition();
 
@@ -163,7 +170,6 @@ public class WormController : MonoBehaviour
                 if (scale > maxScale) {
                     scale = maxScale;
                 }
-
                 
                 indicator.transform.position = pointOfLaunch.position;
                 indicator.transform.localScale = new Vector3(scale, scale, 1);
@@ -195,7 +201,8 @@ public class WormController : MonoBehaviour
         float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
 
         if (direction == Vector2.zero) {
-            direction = Vector2.up;
+            StopLaunching();
+            return;
         }
 
         if (distance < minDistance) {
@@ -208,12 +215,13 @@ public class WormController : MonoBehaviour
             distance = maxDistance;
         }
 
-        weapon.Launch(direction, distance, maxDistance, activeProjectile);
+        weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
         StopLaunching();
     }
 
-    void StopLaunching() {
+    public void StopLaunching() {
         isMouseDown = false;
+        canLaunch = true;
         weapon.ClearSprite();
         indicator.SetActive(false);
         armGraphics.transform.localRotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, 0.0f);
@@ -380,6 +388,19 @@ public class WormController : MonoBehaviour
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+        transform.Find("HealthCanvas").Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+        checkWormDie();
+        transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
+    private void checkWormDie() {
+        if (health <= 0) {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDrawGizmos()
