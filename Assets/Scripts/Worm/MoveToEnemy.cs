@@ -15,7 +15,7 @@ public class MoveToEnemy : Agent
     private GameObject[] enemies;
 
     public override void OnEpisodeBegin() {
-        gameplayInstance.EpisodeBegin(transform.parent, enemy.transform);
+        //gameplayInstance.EpisodeBegin(transform.parent, enemy.transform);
     }
 
     public override void CollectObservations(VectorSensor sensor) {
