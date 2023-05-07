@@ -1,11 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryMenu : MonoBehaviour
 {
     public GameObject inventoryMenu;
     public static bool isOpened;
+    public Button handgunButton;
+    public Button uziButton;
+    public Button shotgunButton;
+    public Button rocketLauncherBlueButton;
+    public Button rocketLauncherBlueButton2;
+    public Button c4Button;
+    public Button grenadeButton;
+    public Button dynamiteButton;
+    public Button clusterBombButton;
+    public Button holyGrenadeButton;
+    public Button homingClusterBombButton;
+    public Button mbBombButton;
+    public Button mineButton;
+    public Button bananaButton;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +42,7 @@ public class InventoryMenu : MonoBehaviour
     }
 
     public void OpenInventory() {
+        CheckButtons();
         inventoryMenu.SetActive(true);
         Time.timeScale = 0f;
         isOpened = true;
@@ -36,6 +52,48 @@ public class InventoryMenu : MonoBehaviour
         inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         isOpened = false;
+    }
+
+    private void CheckButtons() {
+        if (Gameplay.activeTeamColor == TeamColor.BLUE) {
+            WormController wormController = Gameplay.activeWorm.GetComponent<WormController>();
+
+            if (wormController != null) {
+                handgunButton.interactable = wormController.bulletAmmo >= 1;
+                uziButton.interactable = wormController.bulletAmmo >= 3;
+                shotgunButton.interactable = wormController.buckshotAmmo >= 1;
+                rocketLauncherBlueButton.interactable = wormController.rocketBlueAmmo >= 1;
+                rocketLauncherBlueButton2.interactable = wormController.homingRocketAmmo >= 1;
+                c4Button.interactable = wormController.c4Ammo >= 1;
+                grenadeButton.interactable = wormController.grenadeAmmo >= 1;
+                dynamiteButton.interactable = wormController.dynamiteAmmo >= 1;
+                clusterBombButton.interactable = wormController.clusterBombAmmo >= 1;
+                holyGrenadeButton.interactable = wormController.holyGrenadeAmmo >= 1;
+                homingClusterBombButton.interactable = wormController.homingClusterBombAmmo >= 1;
+                mbBombButton.interactable = wormController.mbBombAmmo >= 1;
+                mineButton.interactable = wormController.mineAmmo >= 1;
+                bananaButton.interactable = wormController.bananaAmmo >= 1;
+            }
+        } else {
+            PlayerController playerController = Gameplay.activeWorm.GetComponent<PlayerController>();
+
+            if (playerController != null) {
+                handgunButton.interactable = playerController.bulletAmmo >= 1;
+                uziButton.interactable = playerController.bulletAmmo >= 3;
+                shotgunButton.interactable = playerController.buckshotAmmo >= 1;
+                rocketLauncherBlueButton.interactable = playerController.rocketBlueAmmo >= 1;
+                rocketLauncherBlueButton2.interactable = playerController.homingRocketAmmo >= 1;
+                c4Button.interactable = playerController.c4Ammo >= 1;
+                grenadeButton.interactable = playerController.grenadeAmmo >= 1;
+                dynamiteButton.interactable = playerController.dynamiteAmmo >= 1;
+                clusterBombButton.interactable = playerController.clusterBombAmmo >= 1;
+                holyGrenadeButton.interactable = playerController.holyGrenadeAmmo >= 1;
+                homingClusterBombButton.interactable = playerController.homingClusterBombAmmo >= 1;
+                mbBombButton.interactable = playerController.mbBombAmmo >= 1;
+                mineButton.interactable = playerController.mineAmmo >= 1;
+                bananaButton.interactable = playerController.bananaAmmo >= 1;
+            }
+        }
     }
 
     public void ButtonPressed(int index) {
