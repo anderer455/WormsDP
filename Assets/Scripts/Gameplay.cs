@@ -43,6 +43,16 @@ public class Gameplay : MonoBehaviour
     public Map terrainPrefab;
     [SerializeField]
     public Map windmillPrefab;
+    [SerializeField]
+    public Barrel barrelPrefab;
+    [SerializeField]
+    public Crate cratePrefab;
+    [SerializeField]
+    public FirstAid firstAidPrefab;
+    [SerializeField]
+    public GameObject player1;
+    [SerializeField]
+    public GameObject player2;
 
     public static List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.YELLOW };
     private int currentTeamIndex;
@@ -55,6 +65,8 @@ public class Gameplay : MonoBehaviour
         set { turnTimer = value; }
     }
 	public static int turnTimerSeconds;
+    private float turnPackageDuration = 200f;
+    private static float turnPackageTimer;
 
     private int randomSign;
     private Vector3[] mapStartingPoints;
@@ -70,7 +82,13 @@ public class Gameplay : MonoBehaviour
     void Update() {
         CheckGameEnd();
         turnTimer -= Time.deltaTime;
+        turnPackageTimer -= Time.deltaTime;
 		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
+
+        if (turnPackageTimer <= 0) {
+            SpawnPackage();
+            turnPackageTimer = turnPackageDuration;
+        }
 
         if (turnTimer <= 0) {
             EndTurn();
@@ -78,8 +96,10 @@ public class Gameplay : MonoBehaviour
     }
 
     void SetGameStateAtStart() {
+        turnPackageTimer = turnPackageDuration;
         activeGameState = GameState.START;
-        currentTeamIndex = URandom.Range(-1, validTeamColors.Count-1);
+        currentTeamIndex = URandom.Range(0, validTeamColors.Count);
+        activeTeamColor = validTeamColors[currentTeamIndex];
         switch (activeGameMode) {
             case GameMode.PVP:
                 numberOfComputers = 0;
@@ -104,17 +124,35 @@ public class Gameplay : MonoBehaviour
     private void SetFirstActiveWorm() {
         if (activeTeamColor == TeamColor.BLUE) {
             activeWorm = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+            activeWorm.GetComponent<PlayerController>().enabled = true;
         } else {
             activeWorm = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+            activeWorm.GetComponent<WormController>().enabled = true;
         }
     }
 
     public void SetActiveWorm(GameObject worm) {
         if (worm == null) {
             if (activeTeamColor == TeamColor.BLUE) {
-                activeWorm = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+                for (int i = 0; i < GameObject.Find("Player1").transform.childCount; i++)
+                {
+                    if (GameObject.Find("Player1").transform.GetChild(i).gameObject.activeInHierarchy)
+                    {
+                        activeWorm = GameObject.Find("Player1").transform.GetChild(i).gameObject;
+                        activeWorm.GetComponent<WormController>().enabled = true;
+                        break;
+                    }
+                }
             } else {
-                activeWorm = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+                for (int i = 0; i < GameObject.Find("Player2").transform.childCount; i++)
+                {
+                    if (GameObject.Find("Player2").transform.GetChild(i).gameObject.activeInHierarchy)
+                    {
+                        activeWorm = GameObject.Find("Player2").transform.GetChild(i).gameObject;
+                        activeWorm.GetComponent<PlayerController>().enabled = true;
+                        break;
+                    }
+                }
             }
         } else {
             activeWorm = worm;
@@ -133,12 +171,14 @@ public class Gameplay : MonoBehaviour
         if (activeTeamColor == TeamColor.BLUE) {
             WormController worm = activeWorm.GetComponent<WormController>();
             if (worm != null) {
+                worm.StopLaunching();
                 worm.SetLaunch();
             }
             activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
         } else {
             PlayerController player = activeWorm.GetComponent<PlayerController>();
             if (player != null) {
+                player.StopLaunching();
                 player.SetLaunch();
             }
             activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
@@ -191,19 +231,47 @@ public class Gameplay : MonoBehaviour
         StartTurn();
     }
 
+    void SpawnPackage() {
+        int package = URandom.Range(0, 3);
+        GameObject miscsObject = GameObject.Find("Miscs");
+
+        if (miscsObject.transform.childCount >= 5) {
+            return;
+        }
+
+        if (package == 0) {
+            Instantiate(barrelPrefab, new Vector3(URandom.Range(-15, 16), 10, 0), Quaternion.identity, miscsObject.transform);
+        } else if (package == 1) {
+            Instantiate(cratePrefab, new Vector3(URandom.Range(-15, 16), 10, 0), Quaternion.identity, miscsObject.transform);
+        } else if (package == 2) {
+            Instantiate(firstAidPrefab, new Vector3(URandom.Range(-15, 16), 10, 0), Quaternion.identity, miscsObject.transform);
+        }
+    }
+
     public GameObject[] GetPlayerWorms(Transform player) {
         int wormsCount = player.transform.childCount;
         GameObject[] worms = new GameObject[wormsCount];
 
         for (int i = 0; i < wormsCount; i++) {
-            worms[i] = player.transform.GetChild(i).gameObject;
+            if (player.transform.GetChild(i).gameObject) {
+                worms[i] = player.transform.GetChild(i).gameObject;
+            }
         }
 
         return worms;
     }
 
     void CheckGameEnd() {
-        //TODO
+        GameObject[] player1Worms = GetPlayerWorms(player1.transform);
+        GameObject[] player2Worms = GetPlayerWorms(player2.transform);
+
+        if (player1Worms.Length <= 0) {
+            Debug.Log("Player 2 won!");
+        }
+
+        if (player2Worms.Length <= 0) {
+            Debug.Log("Player 1 won!");
+        }
     }
 
     void SetGameMap() {

@@ -47,8 +47,9 @@ public class WormController : MonoBehaviour
     private bool isWalking;
     private bool canWalkOnSlope;
     private bool canJump;
-    public static bool canLaunch = true;
-    public static bool canSwitch = true;
+    public bool canLaunch = true;
+    public bool canSwitch = true;
+    public bool isAlive = true;
 
     private Vector2 newVelocity;
     private Vector2 newForce;
@@ -103,12 +104,18 @@ public class WormController : MonoBehaviour
 
     private void Update()
     {
-        MyUpdate();
+        if (isAlive == true) {
+            MyUpdate();
+        } else {
+            //gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
     {
-        MyFixedUpdate(xInput);
+        if (isAlive == true) {
+            MyFixedUpdate(xInput);
+        }
     }
 
     public void MyUpdate()
@@ -128,6 +135,8 @@ public class WormController : MonoBehaviour
     }
 
     private void InitializeWorm() {
+        isAlive = true;
+        gameObject.SetActive(true);
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
         wormAnimator = wormGraphics.GetComponent<Animator>();
@@ -461,7 +470,9 @@ public class WormController : MonoBehaviour
 
     private void checkWormDie() {
         if (health <= 0) {
-            Destroy(this.gameObject);
+            gameObject.transform.position = new Vector3(-9999, -9999, 0);
+            isAlive = false;
+            gameObject.SetActive(false);
         }
     }
 

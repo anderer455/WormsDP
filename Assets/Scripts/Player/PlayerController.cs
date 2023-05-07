@@ -47,8 +47,9 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     private bool canWalkOnSlope;
     private bool canJump;
-    public static bool canLaunch = true;
-    public static bool canSwitch = true;
+    public bool canLaunch = true;
+    public bool canSwitch = true;
+    public bool isAlive = true;
 
     private Vector2 newVelocity;
     private Vector2 newForce;
@@ -103,12 +104,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MyUpdate();
+        if (isAlive == true) {
+            MyUpdate();
+        } else {
+            //gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
     {
-        MyFixedUpdate(xInput);
+        if (isAlive == true) {
+            MyFixedUpdate(xInput);
+        }
     }
 
     public void MyUpdate()
@@ -128,6 +135,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void InitializeWorm() {
+        isAlive = true;
+        gameObject.SetActive(true);
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
         wormAnimator = wormGraphics.GetComponent<Animator>();
@@ -230,6 +239,7 @@ public class PlayerController : MonoBehaviour
             distance = maxDistance;
         }
 
+        removeAmmo(activeWeapon, activeProjectile);
         weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
         canLaunch = false;
         canSwitch = false;
@@ -439,9 +449,30 @@ public class PlayerController : MonoBehaviour
         else if (type == ProjectileType.BANANA) { bananaAmmo += ammoAmount; }
     }
 
+    private void removeAmmo(WeaponType weapon, ProjectileType projectile) {
+        if (projectile != ProjectileType.ROCKET) {
+            if (weapon == WeaponType.UZI) { bulletAmmo -= 3; }
+            else if (projectile == ProjectileType.BULLET) { bulletAmmo -= 1; }
+            else if (projectile == ProjectileType.BUCKSHOT) { buckshotAmmo -= 1; }
+            else if (projectile == ProjectileType.ROCKETBLUE) { rocketBlueAmmo -= 1; }
+            else if (projectile == ProjectileType.HOMINGROCKET) { homingRocketAmmo -= 1; }
+            else if (projectile == ProjectileType.C4) { c4Ammo -= 1; }
+            else if (projectile == ProjectileType.GRENADE) { grenadeAmmo -= 1; }
+            else if (projectile == ProjectileType.DYNAMITE) { dynamiteAmmo -= 1; }
+            else if (projectile == ProjectileType.CLUSTERBOMB) { clusterBombAmmo -= 1; }
+            else if (projectile == ProjectileType.HOLYGRENADE) { holyGrenadeAmmo -= 1; }
+            else if (projectile == ProjectileType.HOMINGCLUSTERBOMB) { homingClusterBombAmmo -= 1; }
+            else if (projectile == ProjectileType.MBBOMB) { mbBombAmmo -= 1; }
+            else if (projectile == ProjectileType.MINE) { mineAmmo -= 1; }
+            else if (projectile == ProjectileType.BANANA) { bananaAmmo -= 1; }
+        }
+    }
+
     private void checkWormDie() {
         if (health <= 0) {
-            Destroy(this.gameObject);
+            gameObject.transform.position = new Vector3(-9999, -9999, 0);
+            isAlive = false;
+            gameObject.SetActive(false);
         }
     }
 
