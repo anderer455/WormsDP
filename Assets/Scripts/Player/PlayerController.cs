@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private bool isWalking;
     private bool canWalkOnSlope;
     private bool canJump;
+    public static bool canLaunch = true;
+    public static bool canSwitch = true;
 
     private Vector2 newVelocity;
     private Vector2 newForce;
@@ -73,6 +75,19 @@ public class PlayerController : MonoBehaviour
     public static WeaponType activeWeapon = WeaponType.ROCKETLAUNCHER;
     public static ProjectileType activeProjectile = ProjectileType.ROCKET;
     private Transform pointOfLaunch;
+    public int bulletAmmo = 5;
+    public int buckshotAmmo = 2;
+    public int rocketBlueAmmo = 1;
+    public int homingRocketAmmo = 1;
+    public int c4Ammo = 1;
+    public int grenadeAmmo = 1;
+    public int dynamiteAmmo = 1;
+    public int clusterBombAmmo = 1;
+    public int holyGrenadeAmmo = 1;
+    public int homingClusterBombAmmo = 1;
+    public int mbBombAmmo = 1;
+    public int mineAmmo = 1;
+    public int bananaAmmo = 1;
 
     //Launch indicator
     public GameObject indicator;
@@ -98,14 +113,14 @@ public class PlayerController : MonoBehaviour
 
     public void MyUpdate()
     {
-        if (Gameplay.activeTeamColor == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
             CheckInput();
         }
     }
 
     public void MyFixedUpdate(float xAxisInput)
     {
-        if (Gameplay.activeTeamColor == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
             CheckGround();
             SlopeCheck();
             ApplyMovement(xAxisInput);
@@ -149,13 +164,18 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
-            if ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && isMouseDown == false) {
+            if ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && isMouseDown == false && canLaunch == true) {
                 isMouseDown = true;
                 initialMousePosition = GetWorldPosition();
                 weapon.SetSprite();
             }
 
-            if (isMouseDown == true) {
+            if (isMouseDown == true && canLaunch == true) {
+                if (Gameplay.TurnTimer <= 0) {
+                    StopLaunching();
+                    return;
+                }
+
                 indicator.SetActive(true);
                 Vector2 currentMousePosition = GetWorldPosition();
 
@@ -165,7 +185,6 @@ public class PlayerController : MonoBehaviour
                 if (scale > maxScale) {
                     scale = maxScale;
                 }
-
                 
                 indicator.transform.position = pointOfLaunch.position;
                 indicator.transform.localScale = new Vector3(scale, scale, 1);
@@ -185,7 +204,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true) {
+            if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true && canLaunch == true) {
                 Launching();
             }
         }
@@ -212,6 +231,8 @@ public class PlayerController : MonoBehaviour
         }
 
         weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
+        canLaunch = false;
+        canSwitch = false;
         StopLaunching();
     }
 
@@ -383,11 +404,45 @@ public class PlayerController : MonoBehaviour
     {
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+        transform.Find("HealthCanvas").Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void SetLaunch() {
+        canLaunch = true;
+        canSwitch = true;
+    }
+
+    public void Heal(int healAmount) {
+        health = Mathf.Min(health + healAmount, 100);
+        transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
     }
 
     public void TakeDamage(int damage) {
         health -= damage;
+        checkWormDie();
         transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
+    public void AddAmmo(int ammoAmount, ProjectileType type) {
+        if (type == ProjectileType.BULLET) { bulletAmmo += ammoAmount; }
+        else if (type == ProjectileType.BUCKSHOT) { buckshotAmmo += ammoAmount; }
+        else if (type == ProjectileType.ROCKETBLUE) { rocketBlueAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOMINGROCKET) { homingRocketAmmo += ammoAmount; }
+        else if (type == ProjectileType.C4) { c4Ammo += ammoAmount; }
+        else if (type == ProjectileType.GRENADE) { grenadeAmmo += ammoAmount; }
+        else if (type == ProjectileType.CLUSTERBOMB) { clusterBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.DYNAMITE) { dynamiteAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOLYGRENADE) { holyGrenadeAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOMINGCLUSTERBOMB) { homingClusterBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.MBBOMB) { mbBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.MINE) { mineAmmo += ammoAmount; }
+        else if (type == ProjectileType.BANANA) { bananaAmmo += ammoAmount; }
+    }
+
+    private void checkWormDie() {
+        if (health <= 0) {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDrawGizmos()

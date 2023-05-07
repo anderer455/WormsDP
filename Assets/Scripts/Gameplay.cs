@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using URandom = UnityEngine.Random;
+using TMPro;
 
 public enum TeamColor { NEUTRAL, BLUE, YELLOW }
 public enum GameMode { PVP, PVC, CVC }
@@ -45,7 +46,7 @@ public class Gameplay : MonoBehaviour
 
     public static List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.YELLOW };
     private int currentTeamIndex;
-    public GameObject activeWorm;
+    public static GameObject activeWorm;
 
     private float turnDuration = 60f;
     private static float turnTimer;
@@ -62,6 +63,7 @@ public class Gameplay : MonoBehaviour
     void Start() {
         SetGameStateAtStart();
         SetGameMap();
+        SetFirstActiveWorm();
         StartTurn();
     }
 
@@ -77,7 +79,7 @@ public class Gameplay : MonoBehaviour
 
     void SetGameStateAtStart() {
         activeGameState = GameState.START;
-        currentTeamIndex = URandom.Range(0, validTeamColors.Count);
+        currentTeamIndex = URandom.Range(-1, validTeamColors.Count-1);
         switch (activeGameMode) {
             case GameMode.PVP:
                 numberOfComputers = 0;
@@ -97,6 +99,111 @@ public class Gameplay : MonoBehaviour
                 numberOfComputers = 1;
                 break;
         }
+    }
+
+    private void SetFirstActiveWorm() {
+        if (activeTeamColor == TeamColor.BLUE) {
+            activeWorm = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+        } else {
+            activeWorm = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+        }
+    }
+
+    public void SetActiveWorm(GameObject worm) {
+        if (worm == null) {
+            if (activeTeamColor == TeamColor.BLUE) {
+                activeWorm = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+            } else {
+                activeWorm = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+            }
+        } else {
+            activeWorm = worm;
+        }
+
+        if (activeTeamColor == TeamColor.BLUE) {
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 0f, 1f);
+        } else {
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 0f, 1f, 1f);
+        }
+    }
+
+    void StartTurn() {
+        turnTimer = turnDuration;
+		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
+        if (activeTeamColor == TeamColor.BLUE) {
+            WormController worm = activeWorm.GetComponent<WormController>();
+            if (worm != null) {
+                worm.SetLaunch();
+            }
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
+        } else {
+            PlayerController player = activeWorm.GetComponent<PlayerController>();
+            if (player != null) {
+                player.SetLaunch();
+            }
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
+        }
+        currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
+        activeTeamColor = validTeamColors[currentTeamIndex];
+        SetActiveWorm(null);
+
+        switch (activeTeamColor) {
+            case TeamColor.BLUE:
+                if (activeGameMode == GameMode.PVP || activeGameMode == GameMode.PVC) {
+                    activeGameState = GameState.PLAYERTURN;
+                } else {
+                    activeGameState = GameState.CPUTURN;
+                }
+                break;
+            case TeamColor.YELLOW:
+                if (activeGameMode == GameMode.PVP || activeGameMode == GameMode.PVC) {
+                    activeGameState = GameState.CPUTURN;
+                } else {
+                    activeGameState = GameState.CPU2TURN;
+                }
+                break;
+            default:
+                activeTeamColor = TeamColor.BLUE;
+                activeGameState = GameState.PLAYERTURN;
+                break;
+        }
+    }
+
+    void EndTurn() {
+        StartTurn();
+    }
+
+    public void EpisodeBegin(Transform subject, Transform enemy) {
+        GameObject[] subjects = GetPlayerWorms(subject);
+        GameObject[] enemies = GetPlayerWorms(enemy);
+        List<Vector3> startingPoints = new List<Vector3>(mapStartingPoints);
+
+        for (int i = 0; i < 4; i++) {
+            int startingPoint = URandom.Range(0, startingPoints.Count);
+            subjects[i].transform.localPosition = startingPoints[startingPoint];
+            startingPoints.RemoveAt(startingPoint);
+            
+            startingPoint = URandom.Range(0, startingPoints.Count);
+            enemies[i].transform.localPosition = startingPoints[startingPoint];
+            startingPoints.RemoveAt(startingPoint);
+        }
+
+        StartTurn();
+    }
+
+    public GameObject[] GetPlayerWorms(Transform player) {
+        int wormsCount = player.transform.childCount;
+        GameObject[] worms = new GameObject[wormsCount];
+
+        for (int i = 0; i < wormsCount; i++) {
+            worms[i] = player.transform.GetChild(i).gameObject;
+        }
+
+        return worms;
+    }
+
+    void CheckGameEnd() {
+        //TODO
     }
 
     void SetGameMap() {
@@ -314,70 +421,5 @@ public class Gameplay : MonoBehaviour
         } else {
             Debug.LogError("Object not found");
         }
-    }
-
-    void StartTurn() {
-        turnTimer = turnDuration;
-		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
-        currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
-        activeTeamColor = validTeamColors[currentTeamIndex];
-
-        switch (activeTeamColor) {
-            case TeamColor.BLUE:
-                if (activeGameMode == GameMode.PVP || activeGameMode == GameMode.PVC) {
-                    activeGameState = GameState.PLAYERTURN;
-                } else {
-                    activeGameState = GameState.CPUTURN;
-                }
-                break;
-            case TeamColor.YELLOW:
-                if (activeGameMode == GameMode.PVP || activeGameMode == GameMode.PVC) {
-                    activeGameState = GameState.CPUTURN;
-                } else {
-                    activeGameState = GameState.CPU2TURN;
-                }
-                break;
-            default:
-                activeTeamColor = TeamColor.BLUE;
-                activeGameState = GameState.PLAYERTURN;
-                break;
-        }
-    }
-
-    void EndTurn() {
-        StartTurn();
-    }
-
-    public void EpisodeBegin(Transform subject, Transform enemy) {
-        GameObject[] subjects = GetPlayerWorms(subject);
-        GameObject[] enemies = GetPlayerWorms(enemy);
-        List<Vector3> startingPoints = new List<Vector3>(mapStartingPoints);
-
-        for (int i = 0; i < 4; i++) {
-            int startingPoint = URandom.Range(0, startingPoints.Count);
-            subjects[i].transform.localPosition = startingPoints[startingPoint];
-            startingPoints.RemoveAt(startingPoint);
-            
-            startingPoint = URandom.Range(0, startingPoints.Count);
-            enemies[i].transform.localPosition = startingPoints[startingPoint];
-            startingPoints.RemoveAt(startingPoint);
-        }
-
-        StartTurn();
-    }
-
-    public GameObject[] GetPlayerWorms(Transform player) {
-        int wormsCount = player.transform.childCount;
-        GameObject[] worms = new GameObject[wormsCount];
-
-        for (int i = 0; i < wormsCount; i++) {
-            worms[i] = player.transform.GetChild(i).gameObject;
-        }
-
-        return worms;
-    }
-
-    void CheckGameEnd() {
-        //TODO
     }
 }

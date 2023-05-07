@@ -47,6 +47,8 @@ public class WormController : MonoBehaviour
     private bool isWalking;
     private bool canWalkOnSlope;
     private bool canJump;
+    public static bool canLaunch = true;
+    public static bool canSwitch = true;
 
     private Vector2 newVelocity;
     private Vector2 newForce;
@@ -73,6 +75,19 @@ public class WormController : MonoBehaviour
     public static WeaponType activeWeapon = WeaponType.ROCKETLAUNCHER;
     public static ProjectileType activeProjectile = ProjectileType.ROCKET;
     private Transform pointOfLaunch;
+    public int bulletAmmo = 5;
+    public int buckshotAmmo = 2;
+    public int rocketBlueAmmo = 1;
+    public int homingRocketAmmo = 1;
+    public int c4Ammo = 1;
+    public int grenadeAmmo = 1;
+    public int dynamiteAmmo = 1;
+    public int clusterBombAmmo = 1;
+    public int holyGrenadeAmmo = 1;
+    public int homingClusterBombAmmo = 1;
+    public int mbBombAmmo = 1;
+    public int mineAmmo = 1;
+    public int bananaAmmo = 1;
 
     //Launch indicator
     public GameObject indicator;
@@ -80,7 +95,6 @@ public class WormController : MonoBehaviour
     private float minDistance = 0.1f;
     private float minDistanceUp = 0.4f;
     private float maxScale = 2f;
-    public static bool canLaunch = true;
 
     private void Start()
     {
@@ -99,14 +113,14 @@ public class WormController : MonoBehaviour
 
     public void MyUpdate()
     {
-        if (Gameplay.activeTeamColor == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
             CheckInput();
         }
     }
 
     public void MyFixedUpdate(float xAxisInput)
     {
-        if (Gameplay.activeTeamColor == teamColor) {
+        if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
             CheckGround();
             SlopeCheck();
             ApplyMovement(xAxisInput);
@@ -156,9 +170,10 @@ public class WormController : MonoBehaviour
                 weapon.SetSprite();
             }
 
-            if (isMouseDown == true) {
+            if (isMouseDown == true && canLaunch == true) {
                 if (Gameplay.TurnTimer <= 0) {
                     StopLaunching();
+                    return;
                 }
 
                 indicator.SetActive(true);
@@ -189,7 +204,7 @@ public class WormController : MonoBehaviour
                 }
             }
 
-            if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true) {
+            if ((Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)) && isMouseDown == true && canLaunch == true) {
                 Launching();
             }
         }
@@ -215,13 +230,15 @@ public class WormController : MonoBehaviour
             distance = maxDistance;
         }
 
+        removeAmmo(activeWeapon, activeProjectile);
         weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
+        canLaunch = false;
+        canSwitch = false;
         StopLaunching();
     }
 
     public void StopLaunching() {
         isMouseDown = false;
-        canLaunch = true;
         weapon.ClearSprite();
         indicator.SetActive(false);
         armGraphics.transform.localRotation = Quaternion.Euler(armGraphics.transform.rotation.x, armGraphics.transform.rotation.y, 0.0f);
@@ -391,10 +408,55 @@ public class WormController : MonoBehaviour
         transform.Find("HealthCanvas").Rotate(0.0f, 180.0f, 0.0f);
     }
 
+    public void SetLaunch() {
+        canLaunch = true;
+        canSwitch = true;
+    }
+
+    public void Heal(int healAmount) {
+        health = Mathf.Min(health + healAmount, 100);
+        transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
     public void TakeDamage(int damage) {
         health -= damage;
         checkWormDie();
         transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
+    public void AddAmmo(int ammoAmount, ProjectileType type) {
+        if (type == ProjectileType.BULLET) { bulletAmmo += ammoAmount; }
+        else if (type == ProjectileType.BUCKSHOT) { buckshotAmmo += ammoAmount; }
+        else if (type == ProjectileType.ROCKETBLUE) { rocketBlueAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOMINGROCKET) { homingRocketAmmo += ammoAmount; }
+        else if (type == ProjectileType.C4) { c4Ammo += ammoAmount; }
+        else if (type == ProjectileType.GRENADE) { grenadeAmmo += ammoAmount; }
+        else if (type == ProjectileType.CLUSTERBOMB) { clusterBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.DYNAMITE) { dynamiteAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOLYGRENADE) { holyGrenadeAmmo += ammoAmount; }
+        else if (type == ProjectileType.HOMINGCLUSTERBOMB) { homingClusterBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.MBBOMB) { mbBombAmmo += ammoAmount; }
+        else if (type == ProjectileType.MINE) { mineAmmo += ammoAmount; }
+        else if (type == ProjectileType.BANANA) { bananaAmmo += ammoAmount; }
+    }
+
+    private void removeAmmo(WeaponType weapon, ProjectileType projectile) {
+        if (projectile != ProjectileType.ROCKET) {
+            if (weapon == WeaponType.UZI) { bulletAmmo -= 3; }
+            else if (projectile == ProjectileType.BULLET) { bulletAmmo -= 1; }
+            else if (projectile == ProjectileType.BUCKSHOT) { buckshotAmmo -= 1; }
+            else if (projectile == ProjectileType.ROCKETBLUE) { rocketBlueAmmo -= 1; }
+            else if (projectile == ProjectileType.HOMINGROCKET) { homingRocketAmmo -= 1; }
+            else if (projectile == ProjectileType.C4) { c4Ammo -= 1; }
+            else if (projectile == ProjectileType.GRENADE) { grenadeAmmo -= 1; }
+            else if (projectile == ProjectileType.DYNAMITE) { dynamiteAmmo -= 1; }
+            else if (projectile == ProjectileType.CLUSTERBOMB) { clusterBombAmmo -= 1; }
+            else if (projectile == ProjectileType.HOLYGRENADE) { holyGrenadeAmmo -= 1; }
+            else if (projectile == ProjectileType.HOMINGCLUSTERBOMB) { homingClusterBombAmmo -= 1; }
+            else if (projectile == ProjectileType.MBBOMB) { mbBombAmmo -= 1; }
+            else if (projectile == ProjectileType.MINE) { mineAmmo -= 1; }
+            else if (projectile == ProjectileType.BANANA) { bananaAmmo -= 1; }
+        }
     }
 
     private void checkWormDie() {
