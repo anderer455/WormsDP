@@ -129,6 +129,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfWorms: 4
+--- !u!1 &6326926868691407009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6188289762924049901}
+  m_Layer: 0
+  m_Name: Miscs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6188289762924049901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326926868691407009}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6855237800846765834}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6855237800846765835
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +192,7 @@ Transform:
   - {fileID: 438336232861511868}
   - {fileID: 2347718955126054449}
   - {fileID: 6855237802016675843}
+  - {fileID: 6188289762924049901}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -295,6 +327,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 438336232861511868}
     m_Modifications:
+    - target: {fileID: 548014676501774619, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 639223459829342388, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -405,6 +441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worm (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 639223459829342392, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
 --- !u!4 &1910378006268603939 stripped
@@ -419,6 +459,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 438336232861511868}
     m_Modifications:
+    - target: {fileID: 548014676501774619, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 639223459829342388, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -528,6 +572,10 @@ PrefabInstance:
     - target: {fileID: 639223459829342389, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
       propertyPath: m_Name
       value: Worm (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 639223459829342392, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
@@ -654,6 +702,10 @@ PrefabInstance:
       value: Worm
       objectReference: {fileID: 0}
     - target: {fileID: 639223459829342398, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 9063561801423117258}
+    - target: {fileID: 639223459829342398, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 0}
@@ -719,6 +771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worm (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 639223459829342392, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367df35830e9bf14a94c55e4b060ee2f, type: 3}
 --- !u!4 &6151243224783152158 stripped
@@ -733,6 +789,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 438336232861511868}
     m_Modifications:
+    - target: {fileID: 548014676501774619, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 639223459829342388, guid: 90d8de7810d322d428f51da2af3f1ec1, type: 3}
       propertyPath: m_RootOrder
       value: 1
