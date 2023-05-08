@@ -28,7 +28,6 @@ public class WormsDPAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(Gameplay.turnNumber);
-        sensor.AddObservation(Gameplay.TurnTimer);
         sensor.AddObservation((int)Gameplay.activeTeamColor);
         sensor.AddObservation((int)Gameplay.activeMap);
         
@@ -101,7 +100,8 @@ public class WormsDPAgent : Agent
         float moveX = actions.ContinuousActions[0];
         int jump = actions.DiscreteActions[0];
         int projectileType = actions.DiscreteActions[1];
-        float direction = actions.ContinuousActions[1];
+        float direction1 = actions.ContinuousActions[1];
+        float direction2 = actions.ContinuousActions[2];
         float distance = actions.ContinuousActions[2];
 
         wormController = GetComponent<WormController>();
@@ -113,7 +113,7 @@ public class WormsDPAgent : Agent
             wormController.MyFixedUpdate(moveX);
 
             if (projectileType != 0) {
-                wormController.AILaunching(direction, distance, projectileType);
+                wormController.AILaunching(direction1, direction2, distance, projectileType);
             }
         }
 
@@ -174,10 +174,15 @@ public class WormsDPAgent : Agent
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
         continuousActions[0] = Input.GetAxisRaw("Worm_Move");
+        continuousActions[1] = GetComponent<WormController>().GetDirection('x');
+        continuousActions[2] = GetComponent<WormController>().GetDirection('y');
+        continuousActions[3] = GetComponent<WormController>().GetDistance();
         
         switch (Mathf.RoundToInt(Input.GetAxisRaw("Worm_Jump"))) {
             case 0: discreteActions[0] = 0; break;
             case 1: discreteActions[0] = 1; break;
         }
+
+        discreteActions[1] = GetComponent<WormController>().GetActiveLaunching();
     }
 }

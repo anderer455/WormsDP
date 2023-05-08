@@ -226,6 +226,7 @@ public class Gameplay : MonoBehaviour
             if (worm != null) {
                 worm.StopLaunching();
                 worm.SetLaunch();
+                worm.ResetHeuristic();
             }
             activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
         } else {
@@ -233,6 +234,7 @@ public class Gameplay : MonoBehaviour
             if (player != null) {
                 player.StopLaunching();
                 player.SetLaunch();
+                player.ResetHeuristic();
             }
             activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
         }

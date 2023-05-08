@@ -97,6 +97,12 @@ public class PlayerController : MonoBehaviour
     private float minDistanceUp = 0.4f;
     private float maxScale = 2f;
 
+    private Vector2 directionWas;
+    private float distanceWas;
+    private WeaponType activeWeaponWas;
+    private ProjectileType activeProjectileWas;
+    private int launchingWas;
+
     private void Start()
     {
         InitializeWorm();
@@ -120,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckWormDie();
         if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
+            FillHeuristicLaunching();
             CheckInput();
         }
     }
@@ -218,9 +225,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AILaunching(float AIdirection, float AIdistance, int AIprojectileType) {
-        Vector2 direction = new Vector2(Mathf.Cos(AIdirection * 2 * Mathf.PI), Mathf.Sin(AIdirection * 2 * Mathf.PI));
-        float distance = AIdistance * maxDistance;
+    public void AILaunching(float AIdirection1, float AIdirection2, float AIdistance, int AIprojectileType) {
+        canLaunch = false;
+        canSwitch = false;
+        Vector2 direction = new Vector2(AIdirection1, AIdirection2);
+        float distance = Convert01To4(AIdistance);
 
         if (direction == Vector2.zero) {
             StopLaunching();
@@ -272,12 +281,12 @@ public class PlayerController : MonoBehaviour
 
         removeAmmo(activeWeapon, activeProjectile);
         weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
-        canLaunch = false;
-        canSwitch = false;
         StopLaunching();
     }
 
     public void Launching() {
+        canLaunch = false;
+        canSwitch = false;
         Vector2 currentMousePosition = GetWorldPosition();
         Vector2 direction = (currentMousePosition - initialMousePosition).normalized;
         float distance = Vector2.Distance(initialMousePosition, currentMousePosition);
@@ -297,10 +306,9 @@ public class PlayerController : MonoBehaviour
             distance = maxDistance;
         }
 
+        FillHeuristic(direction, distance);
         removeAmmo(activeWeapon, activeProjectile);
         weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
-        canLaunch = false;
-        canSwitch = false;
         StopLaunching();
     }
 
@@ -489,6 +497,62 @@ public class PlayerController : MonoBehaviour
         health -= damage;
         CheckWormDie();
         transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
+    public void FillHeuristic(Vector2 direction, float distance) {
+        directionWas = direction;
+        distanceWas = Convert4To01(distance);
+        FillHeuristicLaunching();
+    }
+
+    private void FillHeuristicLaunching() {
+        if (canLaunch) {
+            launchingWas = 0;
+        } else {
+            if (activeWeapon == WeaponType.ROCKETLAUNCHER ) { launchingWas = 1; }
+            else if (activeWeapon == WeaponType.HANDGUN) { launchingWas = 2; }
+            else if (activeWeapon == WeaponType.UZI) { launchingWas = 3; }
+            else if (activeWeapon == WeaponType.SHOTGUN) { launchingWas = 4; }
+            else if (activeWeapon == WeaponType.ROCKETLAUNCHERB && activeProjectile == ProjectileType.ROCKETBLUE) { launchingWas = 5; }
+            else if (activeWeapon == WeaponType.ROCKETLAUNCHERB && activeProjectile == ProjectileType.HOMINGROCKET) { launchingWas = 6; }
+            else if (activeProjectile == ProjectileType.C4) { launchingWas = 7; }
+            else if (activeProjectile == ProjectileType.GRENADE) { launchingWas = 8; }
+            else if (activeProjectile == ProjectileType.DYNAMITE) { launchingWas = 9; }
+            else if (activeProjectile == ProjectileType.CLUSTERBOMB) { launchingWas = 10; }
+            else if (activeProjectile == ProjectileType.HOLYGRENADE) { launchingWas = 11; }
+            else if (activeProjectile == ProjectileType.HOMINGCLUSTERBOMB) { launchingWas = 12; }
+            else if (activeProjectile == ProjectileType.MBBOMB) { launchingWas = 13; }
+            else if (activeProjectile == ProjectileType.MINE) { launchingWas = 14; }
+            else if (activeProjectile == ProjectileType.BANANA) { launchingWas = 15; }
+        }
+    }
+
+    public void ResetHeuristic() {
+        directionWas = Vector2.zero;
+        distanceWas = 0f;
+        launchingWas = 0;
+    }
+
+    public float Convert4To01(float value) {
+        return (value - 0.1f) / (4f - 0.1f);
+    }
+    
+    float Convert01To4(float value) {
+        return value * (4f - 0.1f) + 0.1f;
+    }
+
+    public float GetDirection(char axis) {
+        if (axis == 'x') { return directionWas.x; }
+        else if (axis == 'y') { return directionWas.y; }
+        else { return 0; }
+    }
+
+    public float GetDistance() {
+        return distanceWas;
+    }
+
+    public int GetActiveLaunching() {
+        return launchingWas;
     }
 
     public void ResetWorm() {
