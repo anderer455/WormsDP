@@ -32,7 +32,15 @@ public class InventoryMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) {
+        bool canSwitch;
+        
+        if (Gameplay.activeTeamColor == TeamColor.BLUE) {
+            canSwitch = Gameplay.activeWorm.GetComponent<WormController>().canSwitch;
+        } else {
+            canSwitch = Gameplay.activeWorm.GetComponent<PlayerController>().canSwitch;
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && canSwitch) {
             if (isOpened) {
                 CloseInventory();
             } else {
