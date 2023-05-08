@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8daa5b1c6c15560459c967ceda9564df
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blueWinnerPrefab: {fileID: 1803491024336557469, guid: 6f089480368876b4593e92215e062f55, type: 3}
+  - yellowWinnerPrefab: {fileID: 6159600588241462707, guid: e2bfb734f1e385545bf375b85631d8fc, type: 3}
+  - winnerMenu: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

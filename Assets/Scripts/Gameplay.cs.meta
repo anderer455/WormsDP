@@ -13,6 +13,13 @@ MonoImporter:
   - tankPrefab: {fileID: 2344636480374972127, guid: adde0a2532e94564c99bc7c7626c8b39, type: 3}
   - terrainPrefab: {fileID: -3804894039590034541, guid: 40888027c4c4d9e4bbb8243691a332f1, type: 3}
   - windmillPrefab: {fileID: -6962250439257233289, guid: 9d687843e2df0464792bcd6fc2b65929, type: 3}
+  - barrelPrefab: {fileID: 294168312750844244, guid: 20c4891b6e434de4998688feb20a1a7a, type: 3}
+  - cratePrefab: {fileID: 328668868289307855, guid: c4dc2de2173c0bd44bc50b3760ca907c, type: 3}
+  - firstAidPrefab: {fileID: 3126710801318221572, guid: af81c70098f209a428b47bac7cf038c6, type: 3}
+  - player1: {instanceID: 0}
+  - player2: {instanceID: 0}
+  - blueWinnerPrefab: {fileID: 1803491024336557469, guid: 6f089480368876b4593e92215e062f55, type: 3}
+  - yellowWinnerPrefab: {fileID: 6159600588241462707, guid: e2bfb734f1e385545bf375b85631d8fc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

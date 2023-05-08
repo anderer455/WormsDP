@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using URandom = UnityEngine.Random;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum TeamColor { NEUTRAL, BLUE, YELLOW }
 public enum GameMode { PVP, PVC, CVC }
@@ -249,16 +250,15 @@ public class Gameplay : MonoBehaviour
     }
 
     public GameObject[] GetPlayerWorms(Transform player) {
-        int wormsCount = player.transform.childCount;
-        GameObject[] worms = new GameObject[wormsCount];
+        List<GameObject> worms = new List<GameObject>();
 
-        for (int i = 0; i < wormsCount; i++) {
-            if (player.transform.GetChild(i).gameObject) {
-                worms[i] = player.transform.GetChild(i).gameObject;
+        for (int i = 0; i < player.childCount; i++) {
+            if (player.transform.GetChild(i).gameObject.activeInHierarchy) {
+                worms.Add(player.GetChild(i).gameObject);
             }
         }
 
-        return worms;
+        return worms.ToArray();
     }
 
     void CheckGameEnd() {
@@ -267,11 +267,23 @@ public class Gameplay : MonoBehaviour
 
         if (player1Worms.Length <= 0) {
             Debug.Log("Player 2 won!");
+            Winner.isWinner = true;
+            Winner.blueOrYellow = false;
+            StartCoroutine(ReturnToMainMenu(3f));
         }
 
         if (player2Worms.Length <= 0) {
             Debug.Log("Player 1 won!");
+            Winner.isWinner = true;
+            Winner.blueOrYellow = true;
+            StartCoroutine(ReturnToMainMenu(3f));
         }
+    }
+    
+    IEnumerator ReturnToMainMenu(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("MainMenu");
     }
 
     void SetGameMap() {

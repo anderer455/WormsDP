@@ -104,16 +104,14 @@ public class WormController : MonoBehaviour
 
     private void Update()
     {
-        if (isAlive == true) {
+        if (isAlive == true && !Winner.isWinner) {
             MyUpdate();
-        } else {
-            //gameObject.SetActive(false);
         }
     }
 
     private void FixedUpdate()
     {
-        if (isAlive == true) {
+        if (isAlive == true && !Winner.isWinner) {
             MyFixedUpdate(xInput);
         }
     }
