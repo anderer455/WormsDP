@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: WormDemo
+  DemonstrationName: FullTest
   DemonstrationDirectory: Assets\Demos
 --- !u!1 &131034092
 GameObject:
@@ -5687,7 +5687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5c858d08e358442bec312d1a1c2df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMap: 2
   numberOfComputers: 0
   castlePrefab: {fileID: -216032215775433404, guid: 7ad15e8b362a06a45996fac9af6b95db, type: 3}
   cheesePrefab: {fileID: 3807206736290703003, guid: ce3840979be7293489938d1de9807bf6, type: 3}
@@ -5703,6 +5702,7 @@ MonoBehaviour:
   firstAidPrefab: {fileID: 3126710801318221572, guid: af81c70098f209a428b47bac7cf038c6, type: 3}
   player1: {fileID: 2127390247}
   player2: {fileID: 942354260}
+  firstToAlwaysPlay: 2
 --- !u!1 &2069531503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6168,7 +6168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 24
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.size
@@ -6180,14 +6180,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[1]
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[2]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
@@ -6196,11 +6204,11 @@ PrefabInstance:
       objectReference: {fileID: 599278529}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: MaxStep
-      value: 5000
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: gameplayInstance

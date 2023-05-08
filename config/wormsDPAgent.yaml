@@ -18,13 +18,15 @@ behaviors:
       num_layers: 2
     reward_signals:
       extrinsic:
-        strength: 0.1
+        strength: 1
         gamma: 0.99
       gail:
-        strength: 0.9
+        strength: 0.5
+        gamma: 0.8
         demo_path: Assets/Demos/WormDemo_0.demo
     behavioral_cloning:
       strength: 0.9
+      gamma: 0.8
       demo_path: Assets/Demos/WormDemo_0.demo
     max_steps: 500000
     time_horizon: 64

@@ -15,7 +15,7 @@ public class WormController : MonoBehaviour
         set { movementSpeed = value; }
     }
     public TeamColor teamColor;
-    private int health = 100;
+    public int health = 100;
 
     [SerializeField]
     private float groundCheckRadius;
@@ -118,6 +118,7 @@ public class WormController : MonoBehaviour
 
     public void MyUpdate()
     {
+        CheckWormDie();
         if (Gameplay.activeTeamColor == teamColor && gameObject == Gameplay.activeWorm) {
             CheckInput();
         }
@@ -215,6 +216,65 @@ public class WormController : MonoBehaviour
                 Launching();
             }
         }
+    }
+
+    public void AILaunching(float AIdirection, float AIdistance, int AIprojectileType) {
+        Vector2 direction = new Vector2(Mathf.Cos(AIdirection * 2 * Mathf.PI), Mathf.Sin(AIdirection * 2 * Mathf.PI));
+        float distance = AIdistance * maxDistance;
+
+        if (direction == Vector2.zero) {
+            StopLaunching();
+            return;
+        }
+
+        if (distance < minDistance) {
+            if (direction == Vector2.up) {
+                distance = minDistanceUp;
+            } else {
+                distance = minDistance;
+            }
+        } else if (distance > maxDistance) {
+            distance = maxDistance;
+        }
+
+        if (AIprojectileType < 3) {
+            activeProjectile = (ProjectileType)AIprojectileType - 1;
+            if (AIprojectileType == 2) { activeWeapon = WeaponType.HANDGUN; }
+            else { activeWeapon = WeaponType.ROCKETLAUNCHER; }
+        } else {
+            activeProjectile = (ProjectileType)AIprojectileType - 2;
+            if (AIprojectileType == 3) { activeWeapon = WeaponType.UZI; }
+            else { activeWeapon = (WeaponType)AIprojectileType - 1; }
+        }
+
+        int activeAmmo = 0;
+
+        if (activeProjectile == ProjectileType.ROCKET) { activeAmmo = 1; }
+        else if (activeProjectile == ProjectileType.BULLET) { activeAmmo = bulletAmmo; }
+        else if (activeProjectile == ProjectileType.BUCKSHOT) { activeAmmo = buckshotAmmo; }
+        else if (activeProjectile == ProjectileType.ROCKETBLUE) { activeAmmo = rocketBlueAmmo; }
+        else if (activeProjectile == ProjectileType.HOMINGROCKET) { activeAmmo = homingRocketAmmo; }
+        else if (activeProjectile == ProjectileType.C4) { activeAmmo = c4Ammo; }
+        else if (activeProjectile == ProjectileType.GRENADE) { activeAmmo = grenadeAmmo; }
+        else if (activeProjectile == ProjectileType.DYNAMITE) { activeAmmo = dynamiteAmmo; }
+        else if (activeProjectile == ProjectileType.CLUSTERBOMB) { activeAmmo = clusterBombAmmo; }
+        else if (activeProjectile == ProjectileType.HOLYGRENADE) { activeAmmo = holyGrenadeAmmo; }
+        else if (activeProjectile == ProjectileType.HOMINGCLUSTERBOMB) { activeAmmo = homingClusterBombAmmo; }
+        else if (activeProjectile == ProjectileType.MBBOMB) { activeAmmo = mbBombAmmo; }
+        else if (activeProjectile == ProjectileType.MINE) { activeAmmo = mineAmmo; }
+        else if (activeProjectile == ProjectileType.BANANA) { activeAmmo = bananaAmmo; }
+        else { activeAmmo = 0; }
+        
+        if (activeWeapon != WeaponType.ROCKETLAUNCHER && activeAmmo <= 0) {
+            StopLaunching();
+            return;
+        }
+
+        removeAmmo(activeWeapon, activeProjectile);
+        weapon.Launch(direction, distance, maxDistance, activeProjectile, activeWeapon);
+        canLaunch = false;
+        canSwitch = false;
+        StopLaunching();
     }
 
     public void Launching() {
@@ -427,8 +487,27 @@ public class WormController : MonoBehaviour
 
     public void TakeDamage(int damage) {
         health -= damage;
-        checkWormDie();
+        CheckWormDie();
         transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().text = health.ToString();
+    }
+
+    public void ResetWorm() {
+        Heal(100);
+        canLaunch = true;
+        canSwitch = true;
+        bulletAmmo = 5;
+        buckshotAmmo = 2;
+        rocketBlueAmmo = 1;
+        homingRocketAmmo = 1;
+        c4Ammo = 1;
+        grenadeAmmo = 1;
+        dynamiteAmmo = 1;
+        clusterBombAmmo = 1;
+        holyGrenadeAmmo = 1;
+        homingClusterBombAmmo = 1;
+        mbBombAmmo = 1;
+        mineAmmo = 1;
+        bananaAmmo = 1;
     }
 
     public void AddAmmo(int ammoAmount, ProjectileType type) {
@@ -466,10 +545,11 @@ public class WormController : MonoBehaviour
         }
     }
 
-    private void checkWormDie() {
-        if (health <= 0) {
+    private void CheckWormDie() {
+        if (health <= 0 || gameObject.transform.position.y <= -7.15) {
             gameObject.transform.position = new Vector3(-9999, -9999, 0);
             isAlive = false;
+            health = 0;
             gameObject.SetActive(false);
         }
     }

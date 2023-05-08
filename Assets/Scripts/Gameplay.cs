@@ -19,7 +19,7 @@ public class Gameplay : MonoBehaviour
     [SerializeField]
     public static GameDifficulty activeGameDifficulty;
     [SerializeField]
-    public GameMap activeMap;
+    public static GameMap activeMap;
     [SerializeField]
     [Range(0, 2)]
     public int numberOfComputers;
@@ -54,10 +54,13 @@ public class Gameplay : MonoBehaviour
     public GameObject player1;
     [SerializeField]
     public GameObject player2;
+    [SerializeField]
+    public TeamColor firstToAlwaysPlay = TeamColor.BLUE;
 
     public static List<TeamColor> validTeamColors = new List<TeamColor> { TeamColor.BLUE, TeamColor.YELLOW };
     private int currentTeamIndex;
     public static GameObject activeWorm;
+    public static int turnNumber = 0;
 
     private float turnDuration = 60f;
     private static float turnTimer;
@@ -74,6 +77,10 @@ public class Gameplay : MonoBehaviour
 
 
     void Start() {
+        //MyStart();
+    }
+
+    void MyStart() {
         SetGameStateAtStart();
         SetGameMap();
         SetFirstActiveWorm();
@@ -97,10 +104,21 @@ public class Gameplay : MonoBehaviour
     }
 
     void SetGameStateAtStart() {
+        turnNumber = 0;
         turnPackageTimer = turnPackageDuration;
         activeGameState = GameState.START;
-        currentTeamIndex = URandom.Range(0, validTeamColors.Count);
-        activeTeamColor = validTeamColors[currentTeamIndex];
+
+        if (firstToAlwaysPlay == TeamColor.NEUTRAL) {
+            currentTeamIndex = URandom.Range(0, validTeamColors.Count);
+            activeTeamColor = validTeamColors[currentTeamIndex];
+        } else if (firstToAlwaysPlay == TeamColor.BLUE) {
+            currentTeamIndex = 0;
+            activeTeamColor = validTeamColors[currentTeamIndex];
+        } else {
+            currentTeamIndex = 1;
+            activeTeamColor = validTeamColors[currentTeamIndex];
+        }
+
         switch (activeGameMode) {
             case GameMode.PVP:
                 numberOfComputers = 0;
@@ -167,23 +185,11 @@ public class Gameplay : MonoBehaviour
     }
 
     void StartTurn() {
+        turnNumber += 1;
         turnTimer = turnDuration;
 		turnTimerSeconds = Mathf.RoundToInt(turnTimer);
-        if (activeTeamColor == TeamColor.BLUE) {
-            WormController worm = activeWorm.GetComponent<WormController>();
-            if (worm != null) {
-                worm.StopLaunching();
-                worm.SetLaunch();
-            }
-            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
-        } else {
-            PlayerController player = activeWorm.GetComponent<PlayerController>();
-            if (player != null) {
-                player.StopLaunching();
-                player.SetLaunch();
-            }
-            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
-        }
+        
+        ResetWormUI();
         currentTeamIndex = (currentTeamIndex + 1) % validTeamColors.Count;
         activeTeamColor = validTeamColors[currentTeamIndex];
         SetActiveWorm(null);
@@ -214,9 +220,33 @@ public class Gameplay : MonoBehaviour
         StartTurn();
     }
 
+    public void ResetWormUI() {
+        if (activeTeamColor == TeamColor.BLUE) {
+            WormController worm = activeWorm.GetComponent<WormController>();
+            if (worm != null) {
+                worm.StopLaunching();
+                worm.SetLaunch();
+            }
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
+        } else {
+            PlayerController player = activeWorm.GetComponent<PlayerController>();
+            if (player != null) {
+                player.StopLaunching();
+                player.SetLaunch();
+            }
+            activeWorm.transform.Find("HealthCanvas/HealthBar").GetComponent<TextMeshProUGUI>().color = new Color(1f, 1f, 1f, 1f);
+        }
+    }
+
     public void EpisodeBegin(Transform subject, Transform enemy) {
+        activeMap = GameMap.NONE;
         GameObject[] subjects = GetPlayerWorms(subject);
         GameObject[] enemies = GetPlayerWorms(enemy);
+
+        foreach (GameObject obj in subjects) { obj.GetComponent<WormController>().ResetWorm();  }
+        foreach (GameObject obj in enemies) { obj.GetComponent<PlayerController>().ResetWorm();  }
+
+        MyStart();
         List<Vector3> startingPoints = new List<Vector3>(mapStartingPoints);
 
         for (int i = 0; i < 4; i++) {
@@ -229,7 +259,6 @@ public class Gameplay : MonoBehaviour
             startingPoints.RemoveAt(startingPoint);
         }
 
-        StartTurn();
     }
 
     void SpawnPackage() {
@@ -259,6 +288,43 @@ public class Gameplay : MonoBehaviour
         }
 
         return worms.ToArray();
+    }
+
+    public int GetWormsHealths(Transform player) {
+        int wormsHealths = 0;
+
+        for (int i = 0; i < player.childCount; i++) {
+            if (player.transform.GetChild(i).gameObject.activeInHierarchy) {
+                wormsHealths += player.transform.GetChild(i).gameObject.GetComponent<WormController>().health;
+            }
+        }
+        
+        return wormsHealths;
+    }
+
+    public int GetPlayerWormsHealths(Transform player) {
+        int wormsHealths = 0;
+
+        for (int i = 0; i < player.childCount; i++) {
+            if (player.transform.GetChild(i).gameObject.activeInHierarchy) {
+                wormsHealths += player.transform.GetChild(i).gameObject.GetComponent<PlayerController>().health;
+            }
+        }
+
+        return wormsHealths;
+    }
+
+    public GameObject[] GetAllMiscs() {
+        List<GameObject> miscs = new List<GameObject>();
+        GameObject misc = GameObject.Find("Miscs");
+
+        for (int i = 0; i < misc.transform.childCount; i++) {
+            if (misc.transform.GetChild(i).gameObject) {
+                miscs.Add(misc.transform.GetChild(i).gameObject);
+            }
+        }
+
+        return miscs.ToArray();
     }
 
     void CheckGameEnd() {
@@ -297,6 +363,7 @@ public class Gameplay : MonoBehaviour
 
             switch (activeMap) {
                 case GameMap.CASTLE:
+                    activeMap = GameMap.CASTLE;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(16.3f, -5.9f, 0),
                         new Vector3(13.5f, -4.75f, 0),
@@ -313,6 +380,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(castlePrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.CHEESE:
+                    activeMap = GameMap.CHEESE;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-18, 6.2f, 0),
                         new Vector3(-14, 3.1f, 0),
@@ -338,6 +406,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(cheesePrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.DONKEY:
+                    activeMap = GameMap.DONKEY;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-15.75f, -3.5f, 0),
                         new Vector3(-12.61f, -1.14f, 0),
@@ -355,6 +424,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(donkeyPrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.JUNGLE:
+                    activeMap = GameMap.JUNGLE;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-18.08f, 2.82f, 0),
                         new Vector3(-16.83f, -0.53f, 0),
@@ -382,6 +452,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(junglePrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.LABORATORY:
+                    activeMap = GameMap.LABORATORY;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-16.02f, -3.05f, 0),
                         new Vector3(-14.31f, 2.03f, 0),
@@ -404,6 +475,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(laboratoryPrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.MARS:
+                    activeMap = GameMap.MARS;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-18.1f, 2.85f, 0),
                         new Vector3(-14.72f, 6.03f, 0),
@@ -426,6 +498,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(marsPrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.TANK:
+                    activeMap = GameMap.TANK;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-14.49f, -2.12f, 0),
                         new Vector3(-16.76f, 0.4f, 0),
@@ -446,6 +519,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(tankPrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.TERRAIN:
+                    activeMap = GameMap.TERRAIN;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(-16.45f, -3.42f, 0),
                         new Vector3(-10.63f, -4.47f, 0),
@@ -462,6 +536,7 @@ public class Gameplay : MonoBehaviour
                     Instantiate(terrainPrefab, mapObject.transform.position, Quaternion.identity, mapObject.transform);
                     break;
                 case GameMap.WINDMILL:
+                    activeMap = GameMap.WINDMILL;
                     mapStartingPoints = new Vector3[] {
                         new Vector3(14.82f, -4.28f, 0),
                         new Vector3(11.84f, -1.22f, 0),

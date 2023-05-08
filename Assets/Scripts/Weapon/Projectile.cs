@@ -121,6 +121,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.TryGetComponent<Bottom>(out Bottom bottom)) {
+            Destroy(this.gameObject);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision) {
         if (activeProjectile != ProjectileType.BULLET && activeProjectile != ProjectileType.BUCKSHOT) {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !hasHitGround) {
