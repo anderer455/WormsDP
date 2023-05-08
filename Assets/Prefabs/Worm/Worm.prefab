@@ -236,12 +236,28 @@ MonoBehaviour:
     m_Bits: 256
   noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
   fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
+  canLaunch: 1
+  canSwitch: 1
+  isAlive: 1
   wormGraphics: {fileID: 639223461092289470}
   armGraphics: {fileID: 572444083186841046}
   weaponGraphics: {fileID: 1956477528305260675}
   weapon: {fileID: 2200926442652384808}
   isMouseDown: 0
   mainCamera: {fileID: 0}
+  bulletAmmo: 5
+  buckshotAmmo: 2
+  rocketBlueAmmo: 1
+  homingRocketAmmo: 1
+  c4Ammo: 1
+  grenadeAmmo: 1
+  dynamiteAmmo: 1
+  clusterBombAmmo: 1
+  holyGrenadeAmmo: 1
+  homingClusterBombAmmo: 1
+  mbBombAmmo: 1
+  mineAmmo: 1
+  bananaAmmo: 1
   indicator: {fileID: 420495166453799018}
 --- !u!70 &639223459829342394
 CapsuleCollider2D:
@@ -275,7 +291,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 9.81
-  m_Material: {fileID: 6200000, guid: a4bdca4b67f40e44b92cd2769f40204e, type: 2}
+  m_Material: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1

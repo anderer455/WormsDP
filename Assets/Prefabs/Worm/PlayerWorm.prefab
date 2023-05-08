@@ -179,11 +179,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639223459829342388}
-  - component: {fileID: 548014676501774619}
+  - component: {fileID: -681868443752246900}
   - component: {fileID: 639223459829342394}
   - component: {fileID: 639223459829342395}
-  m_Layer: 0
-  m_Name: Worm2
+  m_Layer: 7
+  m_Name: PlayerWorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &548014676501774619
+--- !u!114 &-681868443752246900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,6 +233,9 @@ MonoBehaviour:
     m_Bits: 256
   noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
   fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
+  canLaunch: 1
+  canSwitch: 1
+  isAlive: 1
   wormGraphics: {fileID: 639223461092289470}
   armGraphics: {fileID: 572444083186841046}
   weaponGraphics: {fileID: 1956477528305260675}
@@ -285,7 +288,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 9.81
-  m_Material: {fileID: 6200000, guid: a4bdca4b67f40e44b92cd2769f40204e, type: 2}
+  m_Material: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -717,7 +720,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5640014285115648811}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.72, y: 0.08699995, z: 0}
+  m_LocalPosition: {x: 1, y: 0.08699995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
