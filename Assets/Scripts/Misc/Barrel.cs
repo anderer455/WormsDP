@@ -26,7 +26,7 @@ public class Barrel : MonoBehaviour
     private void DestroyBarrel() {
         if (!isDestroyed) {
             isDestroyed = true;
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Instantiate(explosionPrefab, transform.position + new Vector3(0, -0.35f, 0), Quaternion.identity);
             Destroy(gameObject);
         }
     }

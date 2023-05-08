@@ -196,6 +196,8 @@ public class Weapon : MonoBehaviour
 
         if (weaponType == WeaponType.UZI) {
             StartCoroutine(LaunchMultipleProjectiles(direction, force));
+        } else if (weaponType == WeaponType.SHOTGUN) {
+            LaunchBuckshot(direction, force);
         } else {
             LaunchSingleProjectile(direction, force);
         }
@@ -206,6 +208,25 @@ public class Weapon : MonoBehaviour
         } else {
             PlayerController.activeWeapon = WeaponType.ROCKETLAUNCHER;
             PlayerController.activeProjectile = ProjectileType.ROCKET;
+        }
+    }
+
+    private void LaunchBuckshot(Vector2 direction, float force) {
+        int numberOfPellets = 5;
+        float spreadAngle = 30f;
+        float angleStep = spreadAngle / (numberOfPellets - 1);
+        float startAngle = -spreadAngle / 2;
+
+        for (int i = 0; i < numberOfPellets; i++) {
+            float currentAngle = startAngle + angleStep * i;
+            Quaternion pelletRotation = Quaternion.Euler(0, 0, currentAngle);
+            Vector2 pelletDirection = pelletRotation * direction;
+            pelletDirection.Normalize();
+            GameObject pellet = Instantiate(buckshotPrefab, launchingPosition.position, Quaternion.identity).gameObject;
+            Rigidbody2D rb = pellet.GetComponent<Rigidbody2D>();
+            if (rb != null) {
+                rb.AddForce(pelletDirection * force);
+            }
         }
     }
 

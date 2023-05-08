@@ -156,8 +156,10 @@ MonoBehaviour:
     m_Bits: 4294967295
   threshold: 1
   delay: 1
-  prefab: {fileID: 100000, guid: 092aeef3857c50f41ada30e877c781cd, type: 3}
+  prefab: {fileID: 100000, guid: d6c9b951881191e4e928c6ae3cb0c3e9, type: 3}
+  prefab2: {fileID: 0}
   offset: 0.1
+  additionalExplosions: 0
   rotateTo: 0
   onImpact:
     m_PersistentCalls:

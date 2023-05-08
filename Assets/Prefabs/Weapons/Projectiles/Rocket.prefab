@@ -153,11 +153,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   threshold: 1
   delay: 1
-  prefab: {fileID: 100000, guid: 092aeef3857c50f41ada30e877c781cd, type: 3}
+  prefab: {fileID: 100000, guid: f4f82eb47584cfa409e072159ce237ce, type: 3}
+  prefab2: {fileID: 0}
   offset: 0.1
+  additionalExplosions: 0
   rotateTo: 0
   onImpact:
     m_PersistentCalls:

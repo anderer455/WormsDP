@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 11401416}
   - component: {fileID: 114070398809276716}
   m_Layer: 0
-  m_Name: Explosion (Red Small)
+  m_Name: Explosion Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4783,7 +4783,7 @@ MonoBehaviour:
   StampShape: {fileID: -949900613627661759, guid: 082df75cba6ec094a966a53528dc06ac,
     type: 2}
   StampColor: {r: 1, g: 1, b: 1, a: 1}
-  StampSize: {x: 1, y: 1}
+  StampSize: {x: 2, y: 2}
   StampRandomDirection: 1
   Raycast: 1
   RaycastRadius: 1

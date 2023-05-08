@@ -29,8 +29,14 @@ namespace Destructible2D
 		/// <summary>If you want a prefab to spawn at the impact point, set it here.</summary>
 		public GameObject Prefab { set { prefab = value; } get { return prefab; } } [SerializeField] private GameObject prefab;
 
+		/// <summary>If you want a prefab to spawn additional at the impact point, set it here.</summary>
+		public GameObject Prefab2 { set { prefab2 = value; } get { return prefab2; } } [SerializeField] private GameObject prefab2;
+
 		/// <summary>This allows you to move the start point of the fissure back a bit.</summary>
 		public float Offset { set { offset = value; } get { return offset; } } [SerializeField] private float offset = 0.1f;
+
+		/// <summary>This determines how many additional explosions will spawn.</summary>
+		public int AdditionalExplosions { set { additionalExplosions = value; } get { return additionalExplosions;} } [SerializeField] private int additionalExplosions = 0;
 
 		/// <summary>How should the spawned prefab be rotated?</summary>
 		public RotationType RotateTo { set { rotateTo = value; } get { return rotateTo; } } [SerializeField] private RotationType rotateTo;
@@ -63,7 +69,7 @@ namespace Destructible2D
 
 		private void Collision(Collision2D collision)
 		{
-			if (cooldown <= 0.0f && prefab != null)
+			if (cooldown <= 0.0f && prefab != null && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
 			{
 				if (CwHelper.IndexInMask(collision.gameObject.layer, mask) == true)
 				{
@@ -105,7 +111,23 @@ namespace Destructible2D
 
 							cooldown = delay;
 
-							Instantiate(prefab, point, Quaternion.identity).SetActive(true);
+							int totalExplosions = additionalExplosions + 1;
+							float explosionSpacing = 1f;
+							float startingOffset = (additionalExplosions * explosionSpacing) / 2;
+
+							Vector2 collisionNormal = contact.normal;
+							float spawnAngleRadians = Mathf.Atan2(collisionNormal.y, collisionNormal.x) + Mathf.PI / 2;
+
+							Vector2 spawnDirection = new Vector2(Mathf.Cos(spawnAngleRadians), Mathf.Sin(spawnAngleRadians));
+
+							for (int j = 0; j < totalExplosions; j++) {
+								float offsetX = j * explosionSpacing - startingOffset;
+								if (j == (additionalExplosions / 2)) {
+									Instantiate(prefab, point + (spawnDirection * offsetX), Quaternion.identity).SetActive(true);
+								} else {
+									Instantiate(prefab2, point + (spawnDirection * offsetX), Quaternion.identity).SetActive(true);
+								}
+							}
 
 							if (onImpact != null)
 							{
@@ -143,12 +165,14 @@ namespace Destructible2D.Inspector
 			EndError();
 			Draw("threshold", "The impact force required.");
 			Draw("delay", "This allows you to control the minimum amount of time between fissure creation in seconds.");
+			Draw("additionalExplosions", "This determines how many additional explosions will spawn.");
 
 			Separator();
 
 			BeginError(Any(tgts, t => t.Prefab == null));
 				Draw("prefab", "If you want a prefab to spawn at the impact point, set it here.");
 			EndError();
+			Draw("prefab2", "If you want a prefab to spawn at the impact point, set it here.");
 			Draw("offset", "This allows you to move the start point of the fissure back a bit.");
 			Draw("rotateTo", "How should the spawned prefab be rotated?");
 
