@@ -106,17 +106,15 @@ public class WormsDPAgent : Agent
 
         wormController = GetComponent<WormController>();
 
-        if (wormController != null) {
+        if (Gameplay.activeWorm == gameObject && wormController != null && wormController.canLaunch) {
             if (jump == 1) {
                 wormController.Jump();
             }
             wormController.MyFixedUpdate(moveX);
 
-            if (projectileType != 0) {
-                wormController.AILaunching(direction1, direction2, distance, projectileType);
-            }
+            if (projectileType != 0) { /*wormController.AILaunching(direction1, direction2, distance, projectileType);*/ }
         }
-
+        
         GetAllWormsHealths();
 
         if (subjectsHealths < subjectsHealthsPrevious) { AddReward(-0.1f); }
@@ -147,7 +145,7 @@ public class WormsDPAgent : Agent
 
     private IEnumerator MyEndEpisode() {
         gameplayInstance.ResetWormUI();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         EndEpisode();
     }
 

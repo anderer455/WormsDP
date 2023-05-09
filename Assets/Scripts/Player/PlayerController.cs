@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
 
-    private int facingDirection;
+    [SerializeField]
+    public int previousFacingDirection = 1;
+    [SerializeField]
+    public int facingDirection = 1;
 
     private bool isGrounded;
     private bool isOnSlope;
@@ -99,13 +102,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 directionWas;
     private float distanceWas;
-    private WeaponType activeWeaponWas;
-    private ProjectileType activeProjectileWas;
     private int launchingWas;
 
     private void Start()
     {
-        InitializeWorm();
+        //InitializeWorm();
     }
 
     private void Update()
@@ -141,19 +142,33 @@ public class PlayerController : MonoBehaviour
     }
 
     private void InitializeWorm() {
-        isAlive = true;
         gameObject.SetActive(true);
+        Heal(100);
+        canLaunch = true;
+        canSwitch = true;
+        isAlive = true;
+        bulletAmmo = 5;
+        buckshotAmmo = 2;
+        rocketBlueAmmo = 1;
+        homingRocketAmmo = 1;
+        c4Ammo = 1;
+        grenadeAmmo = 1;
+        dynamiteAmmo = 1;
+        clusterBombAmmo = 1;
+        holyGrenadeAmmo = 1;
+        homingClusterBombAmmo = 1;
+        mbBombAmmo = 1;
+        mineAmmo = 1;
+        bananaAmmo = 1;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
         wormAnimator = wormGraphics.GetComponent<Animator>();
         armAnimator = armGraphics.GetComponent<Animator>();
         capsuleColliderSize = cc.size;
         pointOfLaunch = transform.Find("Arm Graphics/Point Of Launch");
+        previousFacingDirection = facingDirection;
         facingDirection = URandom.Range(0f, 1f) < 0.5f ? -1 : 1;
-        if (facingDirection == -1) {
-            facingDirection = 1;
-            Flip();
-        }
+        SetFlip();
         teamColor = Gameplay.validTeamColors[1];
     }
 
@@ -475,12 +490,16 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    private void Flip()
-    {
+    
+    public void Flip() {
+        previousFacingDirection = facingDirection;
         facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
         transform.Find("HealthCanvas").Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public void SetFlip() {
+        if (previousFacingDirection != facingDirection) { facingDirection = previousFacingDirection; }
     }
 
     public void SetLaunch() {
@@ -556,22 +575,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ResetWorm() {
-        Heal(100);
-        canLaunch = true;
-        canSwitch = true;
-        bulletAmmo = 5;
-        buckshotAmmo = 2;
-        rocketBlueAmmo = 1;
-        homingRocketAmmo = 1;
-        c4Ammo = 1;
-        grenadeAmmo = 1;
-        dynamiteAmmo = 1;
-        clusterBombAmmo = 1;
-        holyGrenadeAmmo = 1;
-        homingClusterBombAmmo = 1;
-        mbBombAmmo = 1;
-        mineAmmo = 1;
-        bananaAmmo = 1;
+        InitializeWorm();
     }
 
     public void AddAmmo(int ammoAmount, ProjectileType type) {

@@ -5962,6 +5962,26 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1910378006268603939, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910378006268603939, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910378006268603939, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910378006268603939, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910378006268603939, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1910378006268603951, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5970,6 +5990,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 1910378006268603951, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: facingDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2077454487518822863, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.13
@@ -5990,6 +6014,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 2739364131369304469, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: facingDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2739364131369304473, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6086,6 +6114,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 6151243224783152146, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: facingDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6151243224783152158, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6150,6 +6182,10 @@ PrefabInstance:
       propertyPath: weaponGraphics
       value: 
       objectReference: {fileID: 223981954}
+    - target: {fileID: 6855237800737257240, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
+      propertyPath: facingDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: TeamId
       value: 0
@@ -6160,7 +6196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_InferenceDevice

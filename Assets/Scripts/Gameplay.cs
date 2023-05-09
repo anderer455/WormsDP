@@ -242,8 +242,8 @@ public class Gameplay : MonoBehaviour
 
     public void EpisodeBegin(Transform subject, Transform enemy) {
         activeMap = GameMap.NONE;
-        GameObject[] subjects = GetPlayerWorms(subject);
-        GameObject[] enemies = GetPlayerWorms(enemy);
+        GameObject[] subjects = GetAllPlayerWorms(subject);
+        GameObject[] enemies = GetAllPlayerWorms(enemy);
 
         foreach (GameObject obj in subjects) { obj.GetComponent<WormController>().ResetWorm();  }
         foreach (GameObject obj in enemies) { obj.GetComponent<PlayerController>().ResetWorm();  }
@@ -278,6 +278,18 @@ public class Gameplay : MonoBehaviour
         } else if (package == 2) {
             Instantiate(firstAidPrefab, new Vector3(URandom.Range(-15, 16), 10, 0), Quaternion.identity, miscsObject.transform);
         }
+    }
+
+    public GameObject[] GetAllPlayerWorms(Transform player) {
+        List<GameObject> worms = new List<GameObject>();
+
+        for (int i = 0; i < player.childCount; i++) {
+            if (player.transform.GetChild(i).gameObject) {
+                worms.Add(player.GetChild(i).gameObject);
+            }
+        }
+
+        return worms.ToArray();
     }
 
     public GameObject[] GetPlayerWorms(Transform player) {
@@ -387,13 +399,9 @@ public class Gameplay : MonoBehaviour
                         new Vector3(-18, 6.2f, 0),
                         new Vector3(-14, 3.1f, 0),
                         new Vector3(-9.5f, 4.5f, 0),
-                        new Vector3(-15.3f, -5.3f, 0),
-                        new Vector3(-11, -2.4f, 0),
                         new Vector3(-5.31f, 0.68f, 0),
                         new Vector3(-1.35f, 0.52f, 0),
-                        new Vector3(0.16f, -4.83f, 0),
                         new Vector3(5.2f, 0.95f, 0),
-                        new Vector3(16.4f, -4.4f, 0),
                         new Vector3(16.6f, 1.4f, 0),
                         new Vector3(8.25f, -3.14f, 0),
                         new Vector3(11.8f, -3.2f, 0),
@@ -413,8 +421,6 @@ public class Gameplay : MonoBehaviour
                         new Vector3(-15.75f, -3.5f, 0),
                         new Vector3(-12.61f, -1.14f, 0),
                         new Vector3(-8.3f, -1.11f, 0),
-                        new Vector3(-3.02f, -2.41f, 0),
-                        new Vector3(0.28f, -3.12f, 0),
                         new Vector3(-2.84f, 5.19f, 0),
                         new Vector3(-1, 2.75f, 0),
                         new Vector3(2.85f, 3.31f, 0),
@@ -439,13 +445,11 @@ public class Gameplay : MonoBehaviour
                         new Vector3(-5.14f, -2.58f, 0),
                         new Vector3(-5.21f, 6.01f, 0),
                         new Vector3(-2.36f, 4.78f, 0),
-                        new Vector3(-1.3f, 0.41f, 0),
                         new Vector3(0, 7.25f, 0),
                         new Vector3(2.21f, 0.72f, 0),
                         new Vector3(3.36f, 3.76f, 0),
                         new Vector3(5.72f, 5.55f, 0),
                         new Vector3(7.78f, 0.1f, 0),
-                        new Vector3(10.22f, -4.86f, 0),
                         new Vector3(10.65f, 2.34f, 0),
                         new Vector3(15.42f, -3.74f, 0),
                         new Vector3(15.94f, 5.18f, 0),
@@ -466,8 +470,6 @@ public class Gameplay : MonoBehaviour
                         new Vector3(-0.21f, 1.9f, 0),
                         new Vector3(4.93f, 4.61f, 0),
                         new Vector3(8.6f, 6.04f, 0),
-                        new Vector3(7.42f, 0.71f, 0),
-                        new Vector3(3.37f, -0.3f, 0),
                         new Vector3(8.63f, -0.97f, 0),
                         new Vector3(10.67f, -0.53f, 0),
                         new Vector3(9.68f, 4.09f, 0),
