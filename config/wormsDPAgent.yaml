@@ -23,11 +23,11 @@ behaviors:
       gail:
         strength: 0.5
         gamma: 0.8
-        demo_path: Assets/Demos/WormDemo_0.demo
+        demo_path: Assets/Demos/FullTest.demo
     behavioral_cloning:
       strength: 0.9
       gamma: 0.8
-      demo_path: Assets/Demos/WormDemo_0.demo
+      demo_path: Assets/Demos/FullTest.demo
     max_steps: 500000
     time_horizon: 64
     summary_freq: 10000
