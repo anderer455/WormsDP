@@ -135,12 +135,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8662837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 1
+  Record: 0
   NumStepsToRecord: 0
   DemonstrationName: FullTest
   DemonstrationDirectory: Assets\Demos
@@ -6196,7 +6196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257245, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_InferenceDevice
@@ -6240,7 +6240,7 @@ PrefabInstance:
       objectReference: {fileID: 599278529}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: MaxStep
-      value: 2500
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6855237800737257246, guid: 9b366ebb8d908764ca069032296e421c, type: 3}
       propertyPath: m_Enabled
