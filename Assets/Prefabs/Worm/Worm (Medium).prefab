@@ -181,8 +181,12 @@ GameObject:
   - component: {fileID: 639223459829342392}
   - component: {fileID: 639223459829342394}
   - component: {fileID: 639223459829342395}
+  - component: {fileID: 639223459829342397}
+  - component: {fileID: 639223459829342398}
+  - component: {fileID: 51931787965539546}
+  - component: {fileID: 3311828398121237406}
   m_Layer: 7
-  m_Name: Worm
+  m_Name: Worm (Medium)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639223459829342389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 12.55, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -222,6 +226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  teamColorInt: 0
+  axisRawMove: Worm_Move
+  axisRawJump: Worm_Jump
   teamColor: 1
   health: 100
   groundCheckRadius: 0.38
@@ -235,17 +242,36 @@ MonoBehaviour:
   noFriction: {fileID: 6200000, guid: 830cadfba0aba834fa1021ca067ca749, type: 2}
   fullFriction: {fileID: 6200000, guid: ca2090a2f42a59e45874eceb9f9d853f, type: 2}
   xInput: 0
+  slopeDownAngle: 0
+  slopeSideAngle: 0
+  lastSlopeAngle: 0
   previousFacingDirection: 1
   facingDirection: 1
+  isGrounded: 0
+  isOnSlope: 0
+  isJumping: 0
+  isWalking: 0
+  canWalkOnSlope: 0
+  canJump: 0
   canLaunch: 1
   canSwitch: 1
   isAlive: 1
+  newVelocity: {x: 0, y: 0}
+  newForce: {x: 0, y: 0}
+  capsuleColliderSize: {x: 0, y: 0}
+  slopeNormalPerp: {x: 0, y: 0}
+  rb: {fileID: 0}
+  cc: {fileID: 0}
   wormGraphics: {fileID: 639223461092289470}
   armGraphics: {fileID: 572444083186841046}
   weaponGraphics: {fileID: 1956477528305260675}
+  wormAnimator: {fileID: 0}
+  armAnimator: {fileID: 0}
   weapon: {fileID: 2200926442652384808}
+  initialMousePosition: {x: 0, y: 0}
   isMouseDown: 0
   mainCamera: {fileID: 0}
+  pointOfLaunch: {fileID: 0}
   bulletAmmo: 5
   buckshotAmmo: 2
   rocketBlueAmmo: 1
@@ -260,6 +286,13 @@ MonoBehaviour:
   mineAmmo: 1
   bananaAmmo: 1
   indicator: {fileID: 420495166453799018}
+  maxDistance: 4
+  minDistance: 0.1
+  minDistanceUp: 0.4
+  maxScale: 2
+  directionWas: {x: 0, y: 0}
+  distanceWas: 0
+  launchingWas: 0
 --- !u!70 &639223459829342394
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -297,6 +330,85 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &639223459829342397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639223459829342389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 24
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 3
+      BranchSizes: 030000000200000006000000
+    VectorActionSize: 
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: WormsDPAgent
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_DeterministicInference: 0
+  m_ObservableAttributeHandling: 0
+--- !u!114 &639223459829342398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639223459829342389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4050d5ccbe2357346934e5fd70ba5941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  enemy: {fileID: 0}
+  gameplayInstance: {fileID: 0}
+--- !u!114 &51931787965539546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639223459829342389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &3311828398121237406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639223459829342389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 0
+  NumStepsToRecord: 0
+  DemonstrationName: Demo(Medium)
+  DemonstrationDirectory: Assets/Demos
 --- !u!1 &639223461092289470
 GameObject:
   m_ObjectHideFlags: 0
