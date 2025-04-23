@@ -1,0 +1,38 @@
+{
+    "worm_medium": {
+        "checkpoints": [
+            {
+                "steps": 941868,
+                "file_path": "results\\Medium_1v1_Flat\\worm_medium\\worm_medium-941868.onnx",
+                "reward": 0.9663608562691132,
+                "creation_time": 1745384303.5151336,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat\\worm_medium\\worm_medium-941868.pt"
+                ]
+            },
+            {
+                "steps": 948250,
+                "file_path": "results\\Medium_1v1_Flat\\worm_medium\\worm_medium-948250.onnx",
+                "reward": 0.95703125,
+                "creation_time": 1745398092.4571395,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat\\worm_medium\\worm_medium-948250.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 948250,
+            "file_path": "results\\Medium_1v1_Flat\\worm_medium.onnx",
+            "reward": 0.95703125,
+            "creation_time": 1745398092.4571395,
+            "auxillary_file_paths": [
+                "results\\Medium_1v1_Flat\\worm_medium\\worm_medium-948250.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}

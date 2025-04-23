@@ -1,0 +1,29 @@
+{
+    "worm_easy": {
+        "checkpoints": [
+            {
+                "steps": 596612,
+                "file_path": "results\\Easy_1v1_Flat\\worm_easy\\worm_easy-596612.onnx",
+                "reward": 0.17647058823529413,
+                "creation_time": 1745338115.1249826,
+                "auxillary_file_paths": [
+                    "results\\Easy_1v1_Flat\\worm_easy\\worm_easy-596612.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 596612,
+            "file_path": "results\\Easy_1v1_Flat\\worm_easy.onnx",
+            "reward": 0.17647058823529413,
+            "creation_time": 1745338115.1249826,
+            "auxillary_file_paths": [
+                "results\\Easy_1v1_Flat\\worm_easy\\worm_easy-596612.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}
