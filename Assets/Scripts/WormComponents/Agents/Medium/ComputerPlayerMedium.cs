@@ -22,6 +22,7 @@ namespace WormComponents.Agents.Medium
                 }
                 else if (state == WormState.States.MOVING)
                 {
+                    m_WormController.m_ActiveWeapon.RandomConfig();
                     GetComponent<DecisionRequester>().enabled = true;
                 }
             };
