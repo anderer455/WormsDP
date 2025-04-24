@@ -114,7 +114,7 @@ namespace WormComponents
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 
-                actionMask.SetActionEnabled(3, 1, false);
+                actionMask.SetActionEnabled(3, 1, true);
             }
             else if (m_WormController.m_State.m_State == WormState.States.ESCAPING)
             {

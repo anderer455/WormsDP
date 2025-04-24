@@ -122,7 +122,7 @@ namespace WormComponents.Agents.Easy
             var yAxis = actions.DiscreteActions[1] - 1; 
             var jumpButton = actions.DiscreteActions[2]; 
             var fireButton = actions.DiscreteActions[3];
-            var newWeaponId = actions.DiscreteActions[4];
+            // var newWeaponId = actions.DiscreteActions[4];
 
             switch (m_WormController.m_State.m_State)
             {
@@ -130,14 +130,14 @@ namespace WormComponents.Agents.Easy
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
                     m_WormController.m_ControllingSignals.m_Jump = jumpButton == 1;
                     m_WormController.m_ControllingSignals.m_Aim = fireButton == 1;
-                    m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    // m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
                     break;
                 case WormState.States.SHOOTING:
                     m_WormController.m_ControllingSignals.m_Aimning = xAxis;
                     m_WormController.m_ControllingSignals.m_PowerChanging = yAxis;
                     // m_WormController.m_ControllingSignals.m_AimCancel = jumpButton == 1;
-                    m_WormController.m_ControllingSignals.m_Fire = jumpButton == 1;
-                    m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    m_WormController.m_ControllingSignals.m_Fire = fireButton == 1;
+                    // m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
                     break;
                 case WormState.States.ESCAPING:
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
@@ -165,7 +165,7 @@ namespace WormComponents.Agents.Easy
             discreteActions[1] = Input.GetAxis("Vertical") > 0f ? 2 : Input.GetAxis("Vertical") < 0f ? 0 : 1;
             discreteActions[2] = Input.GetButton("Jump") ? 1 : 0;
             discreteActions[3] = Input.GetButton("Fire1") ? 1 : 0;
-            discreteActions[4] = GetNewWeaponIdFromInput();
+            // discreteActions[4] = GetNewWeaponIdFromInput();
         }
         
         public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
@@ -191,9 +191,9 @@ namespace WormComponents.Agents.Easy
                 actionMask.SetActionEnabled(3, 1, false);
                 
                 // WeaponID
-                actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0); 
-                actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
             }
             else if (m_WormController.m_State.m_State == WormState.States.MOVING)
             {
@@ -216,9 +216,9 @@ namespace WormComponents.Agents.Easy
                 actionMask.SetActionEnabled(3, 1, true);
                 
                 // WeaponID
-                actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0); 
-                actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
             } 
             else if (m_WormController.m_State.m_State == WormState.States.SHOOTING)
             {
@@ -238,12 +238,12 @@ namespace WormComponents.Agents.Easy
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 
-                actionMask.SetActionEnabled(3, 1, false);
+                actionMask.SetActionEnabled(3, 1, true);
                 
                 // Weapon id
-                actionMask.SetActionEnabled(4, 0, true); 
-                actionMask.SetActionEnabled(4, 1, true);
-                actionMask.SetActionEnabled(4, 2, true);
+                // actionMask.SetActionEnabled(4, 0, true);
+                // actionMask.SetActionEnabled(4, 1, true);
+                // actionMask.SetActionEnabled(4, 2, true);
             }
             else if (m_WormController.m_State.m_State == WormState.States.ESCAPING)
             {
@@ -266,9 +266,9 @@ namespace WormComponents.Agents.Easy
                 actionMask.SetActionEnabled(3, 1, false);
                 
                 // Weapon id
-                actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0); 
-                actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
             }
         }
     }

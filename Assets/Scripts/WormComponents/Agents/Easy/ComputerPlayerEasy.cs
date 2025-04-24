@@ -23,7 +23,6 @@ namespace WormComponents.Agents.Easy
                 else if (state == WormState.States.MOVING)
                 {
                     SetEnemy(RandomEnemy.GetRandomEnemy(m_WormController.GetColor()));
-                    m_WormController.m_ActiveWeapon.RandomConfig();
                     GetComponent<DecisionRequester>().enabled = true;
                 }
             };

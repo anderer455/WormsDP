@@ -8,7 +8,7 @@ behaviors:
       beta: 5.0e-4                    # Strength of entropy regularization.
       epsilon: 0.2                    # Clipping parameter for PPO.
       lambd: 0.95                     # Lambda parameter for GAE (Generalized Advantage Estimation).
-      num_epoch: 3                    # Number of passes through the experience buffer during gradient descent.
+      num_epoch: 1                    # Number of passes through the experience buffer during gradient descent.
       learning_rate_schedule: linear  # How the learning rate changes over time.
     
     network_settings:
@@ -38,7 +38,7 @@ behaviors:
       beta: 5.0e-4                    # Strength of entropy regularization.
       epsilon: 0.2                    # Clipping parameter for PPO.
       lambd: 0.95                     # Lambda parameter for GAE (Generalized Advantage Estimation).
-      num_epoch: 3                    # Number of passes through the experience buffer during gradient descent.
+      num_epoch: 2                    # Number of passes through the experience buffer during gradient descent.
       learning_rate_schedule: linear  # How the learning rate changes over time.
     
     network_settings:

@@ -1,0 +1,38 @@
+{
+    "worm_easy": {
+        "checkpoints": [
+            {
+                "steps": 999999,
+                "file_path": "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy\\worm_easy-999999.onnx",
+                "reward": 0.5039370078740157,
+                "creation_time": 1745458151.6554956,
+                "auxillary_file_paths": [
+                    "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy\\worm_easy-999999.pt"
+                ]
+            },
+            {
+                "steps": 1504361,
+                "file_path": "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy\\worm_easy-1504361.onnx",
+                "reward": 0.7078651685393258,
+                "creation_time": 1745476200.87183,
+                "auxillary_file_paths": [
+                    "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy\\worm_easy-1504361.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1504361,
+            "file_path": "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy.onnx",
+            "reward": 0.7078651685393258,
+            "creation_time": 1745476200.87183,
+            "auxillary_file_paths": [
+                "results\\Easy_1v1_Flat_RocketLauncher\\worm_easy\\worm_easy-1504361.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}
