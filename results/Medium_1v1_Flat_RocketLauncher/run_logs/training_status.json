@@ -1,0 +1,65 @@
+{
+    "worm_medium": {
+        "checkpoints": [
+            {
+                "steps": 999953,
+                "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-999953.onnx",
+                "reward": 0.45454545454545453,
+                "creation_time": 1745484251.4157672,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-999953.pt"
+                ]
+            },
+            {
+                "steps": 1999995,
+                "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-1999995.onnx",
+                "reward": 0.42592592592592593,
+                "creation_time": 1745492047.1585088,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-1999995.pt"
+                ]
+            },
+            {
+                "steps": 2999982,
+                "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-2999982.onnx",
+                "reward": 0.5,
+                "creation_time": 1745499847.5336106,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-2999982.pt"
+                ]
+            },
+            {
+                "steps": 3999944,
+                "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-3999944.onnx",
+                "reward": 0.5188679245283019,
+                "creation_time": 1745507648.8921182,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-3999944.pt"
+                ]
+            },
+            {
+                "steps": 4321214,
+                "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-4321214.onnx",
+                "reward": 0.4875,
+                "creation_time": 1745510177.5674665,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-4321214.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4321214,
+            "file_path": "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium.onnx",
+            "reward": 0.4875,
+            "creation_time": 1745510177.5674665,
+            "auxillary_file_paths": [
+                "results\\Medium_1v1_Flat_RocketLauncher\\worm_medium\\worm_medium-4321214.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}
