@@ -1,0 +1,38 @@
+{
+    "worm_hard_multiweapon": {
+        "checkpoints": [
+            {
+                "steps": 999988,
+                "file_path": "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon\\worm_hard_multiweapon-999988.onnx",
+                "reward": 0.5757575757575758,
+                "creation_time": 1745554290.9249558,
+                "auxillary_file_paths": [
+                    "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon\\worm_hard_multiweapon-999988.pt"
+                ]
+            },
+            {
+                "steps": 1035601,
+                "file_path": "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon\\worm_hard_multiweapon-1035601.onnx",
+                "reward": 0.7207207207207207,
+                "creation_time": 1745555809.152962,
+                "auxillary_file_paths": [
+                    "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon\\worm_hard_multiweapon-1035601.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1035601,
+            "file_path": "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon.onnx",
+            "reward": 0.7207207207207207,
+            "creation_time": 1745555809.152962,
+            "auxillary_file_paths": [
+                "results\\Hard_1v1_Flat_RocketLauncher\\worm_hard_multiweapon\\worm_hard_multiweapon-1035601.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}

@@ -272,7 +272,7 @@ namespace WormComponents.Agents.Hard
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 
-                actionMask.SetActionEnabled(3, 1, false);
+                actionMask.SetActionEnabled(3, 1, true);
                 
                 // Weapon id
                 // actionMask.SetActionEnabled(4, 0, true);

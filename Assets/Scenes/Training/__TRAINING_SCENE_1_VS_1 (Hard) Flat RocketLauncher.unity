@@ -219,6 +219,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8029750733970227141, guid: caceab72e49e1514d8d66523ff562397, type: 3}
+      propertyPath: m_MyTeamSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 8dc0952d07085d74484920bf88dfaa9d, type: 2}
+    - target: {fileID: 8029750733970227141, guid: caceab72e49e1514d8d66523ff562397, type: 3}
+      propertyPath: m_EnemyTeamSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 896fb0bbfe0527a4d928a418b001e222, type: 2}
     - target: {fileID: 2943179628533323015, guid: b652d8c669014264e880053399821abc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -259,11 +267,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8029750733970227141, guid: caceab72e49e1514d8d66523ff562397, type: 3}
+    - target: {fileID: 8029750733970227141, guid: b652d8c669014264e880053399821abc, type: 3}
       propertyPath: m_MyTeamSettings
       value: 
       objectReference: {fileID: 11400000, guid: 8dc0952d07085d74484920bf88dfaa9d, type: 2}
-    - target: {fileID: 8029750733970227141, guid: caceab72e49e1514d8d66523ff562397, type: 3}
+    - target: {fileID: 8029750733970227141, guid: b652d8c669014264e880053399821abc, type: 3}
       propertyPath: m_EnemyTeamSettings
       value: 
       objectReference: {fileID: 11400000, guid: 896fb0bbfe0527a4d928a418b001e222, type: 2}
