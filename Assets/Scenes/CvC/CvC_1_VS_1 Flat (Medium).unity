@@ -443,6 +443,14 @@ PrefabInstance:
       propertyPath: clonedSprite
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8163658627243510292, guid: e31b171480711dd4387d41dab834cb47, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163658627243510292, guid: e31b171480711dd4387d41dab834cb47, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5257743952239248054, guid: fd0d6c553a3bec84fbb6f6743d508bbd, type: 3}
       propertyPath: m_Name
       value: Landscape Flat
@@ -486,14 +494,6 @@ PrefabInstance:
     - target: {fileID: 6095062076437078024, guid: fd0d6c553a3bec84fbb6f6743d508bbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163658627243510292, guid: e31b171480711dd4387d41dab834cb47, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163658627243510292, guid: e31b171480711dd4387d41dab834cb47, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -948,8 +948,8 @@ MonoBehaviour:
   - {fileID: 81354886}
   m_Map: {fileID: 0}
   m_TeamsSettings:
-  - {fileID: 11400000, guid: c84e406cc9dc75d4c836b6e5d5219d8f, type: 2}
-  - {fileID: 11400000, guid: 90c7bf414e409a841b7a20e574f5ffd9, type: 2}
+  - {fileID: 11400000, guid: bc78e831215ce6940bffcc6ef325dc65, type: 2}
+  - {fileID: 11400000, guid: 804c05f9b0ffa294cacb8e080eb140b0, type: 2}
 --- !u!114 &8147645030288652124
 MonoBehaviour:
   m_ObjectHideFlags: 0
