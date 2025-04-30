@@ -230,9 +230,9 @@ namespace WormComponents.Agents.Medium
                 // WeaponID
                 if (m_WormController.m_Weapons.Count > 1)
                 {
-                    actionMask.SetActionEnabled(4, 0, false);
-                    actionMask.SetActionEnabled(4, 1, false);
-                    actionMask.SetActionEnabled(4, 2, false);
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
                 }
             }
             else if (m_WormController.m_State.m_State == WormState.States.MOVING)
@@ -258,9 +258,9 @@ namespace WormComponents.Agents.Medium
                 // WeaponID
                 if (m_WormController.m_Weapons.Count > 1)
                 {
-                    actionMask.SetActionEnabled(4, 0, false);
-                    actionMask.SetActionEnabled(4, 1, false);
-                    actionMask.SetActionEnabled(4, 2, false);
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
                 }
             } 
             else if (m_WormController.m_State.m_State == WormState.States.SHOOTING)
@@ -314,9 +314,9 @@ namespace WormComponents.Agents.Medium
                 // WeaponID
                 if (m_WormController.m_Weapons.Count > 1)
                 {
-                    actionMask.SetActionEnabled(4, 0, false);
-                    actionMask.SetActionEnabled(4, 1, false);
-                    actionMask.SetActionEnabled(4, 2, false);
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
                 }
             }
         }

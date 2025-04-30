@@ -237,9 +237,12 @@ namespace WormComponents.Agents.Hard
                 actionMask.SetActionEnabled(3, 1, false);
                 
                 // WeaponID
-                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
-                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                if (m_WormController.m_Weapons.Count > 1)
+                {
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                }
             }
             else if (m_WormController.m_State.m_State == WormState.States.MOVING)
             {
@@ -262,9 +265,12 @@ namespace WormComponents.Agents.Hard
                 actionMask.SetActionEnabled(3, 1, true);
                 
                 // WeaponID
-                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
-                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                if (m_WormController.m_Weapons.Count > 1)
+                {
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                }
             } 
             else if (m_WormController.m_State.m_State == WormState.States.SHOOTING)
             {
@@ -286,10 +292,13 @@ namespace WormComponents.Agents.Hard
                 actionMask.SetActionEnabled(3, 0, true); 
                 actionMask.SetActionEnabled(3, 1, true);
                 
-                // Weapon id
-                // actionMask.SetActionEnabled(4, 0, true);
-                // actionMask.SetActionEnabled(4, 1, true);
-                // actionMask.SetActionEnabled(4, 2, true);
+                // WeaponID
+                if (m_WormController.m_Weapons.Count > 1)
+                {
+                    actionMask.SetActionEnabled(4, 0, true);
+                    actionMask.SetActionEnabled(4, 1, true);
+                    actionMask.SetActionEnabled(4, 2, true);
+                }
             }
             else if (m_WormController.m_State.m_State == WormState.States.ESCAPING)
             {
@@ -311,10 +320,13 @@ namespace WormComponents.Agents.Hard
                 actionMask.SetActionEnabled(3, 0, true);
                 actionMask.SetActionEnabled(3, 1, false);
                 
-                // Weapon id
-                // actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
-                // actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
-                // actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                // WeaponID
+                if (m_WormController.m_Weapons.Count > 1)
+                {
+                    actionMask.SetActionEnabled(4, 0, m_WormController.m_ControllingSignals.m_WeaponId == 0);
+                    actionMask.SetActionEnabled(4, 1, m_WormController.m_ControllingSignals.m_WeaponId == 1);
+                    actionMask.SetActionEnabled(4, 2, m_WormController.m_ControllingSignals.m_WeaponId == 2);
+                }
             }
         }
     }
