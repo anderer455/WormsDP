@@ -156,9 +156,10 @@ namespace WormComponents.Agents.Hard
             var yAxis = actions.DiscreteActions[1] - 1; 
             var jumpButton = actions.DiscreteActions[2]; 
             var fireButton = actions.DiscreteActions[3];
+            int newWeaponId = 0;
             if (m_WormController.m_Weapons.Count > 1)
             {
-                var newWeaponId = actions.DiscreteActions[4];
+                newWeaponId = actions.DiscreteActions[4];
             }
 
             switch (m_WormController.m_State.m_State)
