@@ -1,0 +1,470 @@
+{
+    "worm_medium_cloning": {
+        "checkpoints": [
+            {
+                "steps": 5999934,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-5999934.onnx",
+                "reward": 0.0,
+                "creation_time": 1745915833.8366988,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-5999934.pt"
+                ]
+            },
+            {
+                "steps": 6199999,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6199999.onnx",
+                "reward": -0.023529411764705882,
+                "creation_time": 1745917756.5144045,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6199999.pt"
+                ]
+            },
+            {
+                "steps": 6399915,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6399915.onnx",
+                "reward": 0.005917159763313609,
+                "creation_time": 1745919784.8163855,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6399915.pt"
+                ]
+            },
+            {
+                "steps": 6599884,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6599884.onnx",
+                "reward": -0.023255813953488372,
+                "creation_time": 1745921703.2214148,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6599884.pt"
+                ]
+            },
+            {
+                "steps": 6799972,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6799972.onnx",
+                "reward": 0.018072289156626505,
+                "creation_time": 1745923601.073835,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6799972.pt"
+                ]
+            },
+            {
+                "steps": 6999959,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6999959.onnx",
+                "reward": 0.0,
+                "creation_time": 1745925505.639683,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-6999959.pt"
+                ]
+            },
+            {
+                "steps": 7199971,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7199971.onnx",
+                "reward": -0.006756756756756757,
+                "creation_time": 1745927402.7172494,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7199971.pt"
+                ]
+            },
+            {
+                "steps": 7399982,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7399982.onnx",
+                "reward": -0.015384615384615385,
+                "creation_time": 1745929304.8668182,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7399982.pt"
+                ]
+            },
+            {
+                "steps": 7599989,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7599989.onnx",
+                "reward": 0.0,
+                "creation_time": 1745931200.2574584,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7599989.pt"
+                ]
+            },
+            {
+                "steps": 7799959,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7799959.onnx",
+                "reward": 0.02040816326530612,
+                "creation_time": 1745933103.288929,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7799959.pt"
+                ]
+            },
+            {
+                "steps": 7999914,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7999914.onnx",
+                "reward": 0.006711409395973154,
+                "creation_time": 1745935006.5150743,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-7999914.pt"
+                ]
+            },
+            {
+                "steps": 8199981,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8199981.onnx",
+                "reward": 0.0,
+                "creation_time": 1745936907.9192722,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8199981.pt"
+                ]
+            },
+            {
+                "steps": 8399976,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8399976.onnx",
+                "reward": -0.017699115044247787,
+                "creation_time": 1745938942.1815565,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8399976.pt"
+                ]
+            },
+            {
+                "steps": 8599958,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8599958.onnx",
+                "reward": 0.14285714285714285,
+                "creation_time": 1745940982.4911196,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8599958.pt"
+                ]
+            },
+            {
+                "steps": 8799948,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8799948.onnx",
+                "reward": -0.02247191011235955,
+                "creation_time": 1745943010.0385723,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8799948.pt"
+                ]
+            },
+            {
+                "steps": 8999983,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8999983.onnx",
+                "reward": 0.0,
+                "creation_time": 1745945030.2053475,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-8999983.pt"
+                ]
+            },
+            {
+                "steps": 9199988,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9199988.onnx",
+                "reward": 0.030927835051546393,
+                "creation_time": 1745947046.8385189,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9199988.pt"
+                ]
+            },
+            {
+                "steps": 9399976,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9399976.onnx",
+                "reward": 0.028901734104046242,
+                "creation_time": 1745949154.5815797,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9399976.pt"
+                ]
+            },
+            {
+                "steps": 9599995,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9599995.onnx",
+                "reward": 0.07462686567164178,
+                "creation_time": 1745951279.161767,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9599995.pt"
+                ]
+            },
+            {
+                "steps": 9799972,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9799972.onnx",
+                "reward": -0.00684931506849315,
+                "creation_time": 1745953447.4591668,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9799972.pt"
+                ]
+            },
+            {
+                "steps": 9999996,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9999996.onnx",
+                "reward": 0.0,
+                "creation_time": 1745955515.5954337,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-9999996.pt"
+                ]
+            },
+            {
+                "steps": 10199938,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10199938.onnx",
+                "reward": 0.02054794520547945,
+                "creation_time": 1745957559.2687528,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10199938.pt"
+                ]
+            },
+            {
+                "steps": 10399913,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10399913.onnx",
+                "reward": -0.019230769230769232,
+                "creation_time": 1745959580.0387976,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10399913.pt"
+                ]
+            },
+            {
+                "steps": 10599987,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10599987.onnx",
+                "reward": 0.014705882352941176,
+                "creation_time": 1745961585.9756665,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10599987.pt"
+                ]
+            },
+            {
+                "steps": 10799949,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10799949.onnx",
+                "reward": -0.05555555555555555,
+                "creation_time": 1745963599.6271646,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10799949.pt"
+                ]
+            },
+            {
+                "steps": 10999949,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10999949.onnx",
+                "reward": 0.024193548387096774,
+                "creation_time": 1745965619.6121109,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-10999949.pt"
+                ]
+            },
+            {
+                "steps": 11199955,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11199955.onnx",
+                "reward": 0.0,
+                "creation_time": 1745967636.0383694,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11199955.pt"
+                ]
+            },
+            {
+                "steps": 11399890,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11399890.onnx",
+                "reward": 0.018518518518518517,
+                "creation_time": 1745969645.3563414,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11399890.pt"
+                ]
+            },
+            {
+                "steps": 11599982,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11599982.onnx",
+                "reward": 0.0,
+                "creation_time": 1745971676.3436017,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11599982.pt"
+                ]
+            },
+            {
+                "steps": 11799972,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11799972.onnx",
+                "reward": -0.03529411764705882,
+                "creation_time": 1745973681.1103544,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11799972.pt"
+                ]
+            },
+            {
+                "steps": 11999977,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11999977.onnx",
+                "reward": -0.011428571428571429,
+                "creation_time": 1745975689.6126692,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-11999977.pt"
+                ]
+            },
+            {
+                "steps": 12199937,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12199937.onnx",
+                "reward": 0.014084507042253521,
+                "creation_time": 1745977705.122065,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12199937.pt"
+                ]
+            },
+            {
+                "steps": 12399942,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12399942.onnx",
+                "reward": -0.006329113924050633,
+                "creation_time": 1745979711.334958,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12399942.pt"
+                ]
+            },
+            {
+                "steps": 12599969,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12599969.onnx",
+                "reward": 0.0,
+                "creation_time": 1745981721.2839115,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12599969.pt"
+                ]
+            },
+            {
+                "steps": 12799978,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12799978.onnx",
+                "reward": 0.030864197530864196,
+                "creation_time": 1745983734.328219,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12799978.pt"
+                ]
+            },
+            {
+                "steps": 12999964,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12999964.onnx",
+                "reward": -0.0392156862745098,
+                "creation_time": 1745985755.664971,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-12999964.pt"
+                ]
+            },
+            {
+                "steps": 13199996,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13199996.onnx",
+                "reward": 0.0,
+                "creation_time": 1745987765.0114808,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13199996.pt"
+                ]
+            },
+            {
+                "steps": 13399991,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13399991.onnx",
+                "reward": 0.0196078431372549,
+                "creation_time": 1745989775.9124455,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13399991.pt"
+                ]
+            },
+            {
+                "steps": 13599973,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13599973.onnx",
+                "reward": -0.014598540145985401,
+                "creation_time": 1745991789.2547007,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13599973.pt"
+                ]
+            },
+            {
+                "steps": 13799915,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13799915.onnx",
+                "reward": 0.027777777777777776,
+                "creation_time": 1745993816.983173,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13799915.pt"
+                ]
+            },
+            {
+                "steps": 13999971,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13999971.onnx",
+                "reward": -0.03816793893129771,
+                "creation_time": 1745995838.4174817,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-13999971.pt"
+                ]
+            },
+            {
+                "steps": 14199978,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14199978.onnx",
+                "reward": -0.041666666666666664,
+                "creation_time": 1745997875.0780232,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14199978.pt"
+                ]
+            },
+            {
+                "steps": 14399970,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14399970.onnx",
+                "reward": -0.009708737864077669,
+                "creation_time": 1745999918.8093357,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14399970.pt"
+                ]
+            },
+            {
+                "steps": 14599967,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14599967.onnx",
+                "reward": 0.07142857142857142,
+                "creation_time": 1746001938.887073,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14599967.pt"
+                ]
+            },
+            {
+                "steps": 14799978,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14799978.onnx",
+                "reward": 0.010526315789473684,
+                "creation_time": 1746004055.634864,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14799978.pt"
+                ]
+            },
+            {
+                "steps": 14999980,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14999980.onnx",
+                "reward": 0.0,
+                "creation_time": 1746006203.4161088,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-14999980.pt"
+                ]
+            },
+            {
+                "steps": 15199977,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15199977.onnx",
+                "reward": 0.0,
+                "creation_time": 1746008343.8259485,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15199977.pt"
+                ]
+            },
+            {
+                "steps": 15399909,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15399909.onnx",
+                "reward": 0.029411764705882353,
+                "creation_time": 1746010491.7389328,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15399909.pt"
+                ]
+            },
+            {
+                "steps": 15599979,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15599979.onnx",
+                "reward": -0.012658227848101266,
+                "creation_time": 1746012640.89071,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15599979.pt"
+                ]
+            },
+            {
+                "steps": 15621047,
+                "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15621047.onnx",
+                "reward": -0.010638297872340425,
+                "creation_time": 1746012865.2771537,
+                "auxillary_file_paths": [
+                    "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15621047.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 15621047,
+            "file_path": "results\\Medium_1v1_Castle_clon\\worm_medium_cloning.onnx",
+            "reward": -0.010638297872340425,
+            "creation_time": 1746012865.2771537,
+            "auxillary_file_paths": [
+                "results\\Medium_1v1_Castle_clon\\worm_medium_cloning\\worm_medium_cloning-15621047.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}
