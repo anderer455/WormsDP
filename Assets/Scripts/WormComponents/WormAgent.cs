@@ -22,6 +22,11 @@ namespace WormComponents
             var yAxis = actions.DiscreteActions[1] - 1; 
             var jumpButton = actions.DiscreteActions[2]; 
             var fireButton = actions.DiscreteActions[3];
+            int newWeaponId = 0;
+            if (m_WormController.m_Weapons.Count > 1)
+            {
+                newWeaponId = actions.DiscreteActions[4];
+            }
 
             switch (m_WormController.m_State.m_State)
             {
@@ -29,12 +34,19 @@ namespace WormComponents
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
                     m_WormController.m_ControllingSignals.m_Jump = jumpButton == 1;
                     m_WormController.m_ControllingSignals.m_Aim = fireButton == 1;
+                    if (m_WormController.m_Weapons.Count > 1)
+                    {
+                        m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    }
                     break;
                 case WormState.States.SHOOTING:
                     m_WormController.m_ControllingSignals.m_Aimning = xAxis;
                     m_WormController.m_ControllingSignals.m_PowerChanging = yAxis;
-                    // m_WormController.m_ControllingSignals.m_AimCancel = jumpButton == 1;
-                    m_WormController.m_ControllingSignals.m_Fire = jumpButton == 1;
+                    m_WormController.m_ControllingSignals.m_Fire = fireButton == 1;
+                    if (m_WormController.m_Weapons.Count > 1)
+                    {
+                        m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    }
                     break;
                 case WormState.States.ESCAPING:
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
@@ -108,9 +120,9 @@ namespace WormComponents
                 actionMask.SetActionEnabled(1, 1, true);
                 actionMask.SetActionEnabled(1, 2, true); 
             
-                // Jump. Shot
+                // Jump.
                 actionMask.SetActionEnabled(2, 0, true); 
-                actionMask.SetActionEnabled(2, 1, true);
+                actionMask.SetActionEnabled(2, 1, false);
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 

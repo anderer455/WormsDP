@@ -119,13 +119,20 @@ namespace WormComponents.Agents.Medium
                 sensor.AddObservation(i == m_WormController.m_ControllingSignals.m_WeaponId);
             }
             
-            var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(20, 0.1f);
+            var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(m_WormController.m_ControllingSignals.m_WeaponId, 20, 0.1f);
+            int j = 0;
+
             foreach (var point in points)
             {
                 sensor.AddObservation(((Vector2)m_WormController.transform.position - point).magnitude);
                 sensor.AddObservation(((Vector2)m_WormController.transform.position - point).normalized);
                 Debug.DrawLine(m_WormController.m_ActiveWeapon.m_LaunchPoint.position, point);
+                j++;
             }
+
+            for (; j < 20; j++)
+                sensor.AddObservation(0);
+                sensor.AddObservation(0);
         }
         
         public override void ApplyEnemyLayers(LayerMask lm)

@@ -96,14 +96,19 @@ namespace WormComponents.Agents.Easy
                 sensor.AddObservation(i == m_WormController.m_ControllingSignals.m_WeaponId);
             }
 
-            var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(20, 0.1f);
+            var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(m_WormController.m_ControllingSignals.m_WeaponId, 20, 0.1f);
             if (m_EnemyWormController != null)
             {
+                int i = 0;
                 foreach (var point in points)
                 {
                     sensor.AddObservation(((Vector2)m_EnemyWormController.transform.position - point).magnitude);
                     Debug.DrawLine(m_WormController.m_ActiveWeapon.m_LaunchPoint.position, point);
+                    i++;
                 }
+                
+                for (; i < 20; i++)
+                    sensor.AddObservation(0);
             }
             else
             {

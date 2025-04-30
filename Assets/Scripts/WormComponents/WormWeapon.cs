@@ -60,7 +60,7 @@ namespace WormComponents
             }
         }
         
-        public List<Vector2> CalculateTrajectory(int maxSteps, float timeStep)
+        public List<Vector2> CalculateTrajectory(int activeWeapon, int maxSteps, float timeStep)
         {
             var startPosition = m_LaunchPoint.position;
             var initialVelocity = GetProjectileVelocity(transform.right);
@@ -68,15 +68,38 @@ namespace WormComponents
             var points = new List<Vector2>();
             var gravity = Physics2D.gravity;
 
-            for (int i = 0; i < maxSteps; i++)
+            switch (activeWeapon)
             {
-                float time = i * timeStep;
-                
-                float x = startPosition.x + initialVelocity.x * time;
-                float y = startPosition.y + initialVelocity.y * time + 0.5f * gravity.y * time * time;
+                case 0:
+                    for (int i = 0; i < maxSteps; i++)
+                    {
+                        float time = i * timeStep;
+                        
+                        float x = startPosition.x + initialVelocity.x * time;
+                        float y = startPosition.y + initialVelocity.y * time + 0.5f * gravity.y * time * time;
 
-                Vector2 newPosition = new Vector2(x, y);
-                points.Add(newPosition);
+                        Vector2 newPosition = new Vector2(x, y);
+                        points.Add(newPosition);
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < maxSteps; i++)
+                    {
+                        float time = i * timeStep;
+                        float x = startPosition.x + initialVelocity.x * time;
+                        float y = startPosition.y + initialVelocity.y * time;
+                        points.Add(new Vector2(x, y));
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < 2; i++)
+                    {
+                        float time = i * timeStep;
+                        float x = startPosition.x + initialVelocity.x * time;
+                        float y = startPosition.y + initialVelocity.y * time;
+                        points.Add(new Vector2(x, y));
+                    }
+                    break;
             }
 
             return points;

@@ -284,9 +284,9 @@ namespace WormComponents.Agents.Hard
                 actionMask.SetActionEnabled(1, 1, true);
                 actionMask.SetActionEnabled(1, 2, true); 
             
-                // Jump. Shot
+                // Jump.
                 actionMask.SetActionEnabled(2, 0, true); 
-                actionMask.SetActionEnabled(2, 1, true);
+                actionMask.SetActionEnabled(2, 1, false);
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 
