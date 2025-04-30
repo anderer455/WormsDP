@@ -156,7 +156,10 @@ namespace WormComponents.Agents.Hard
             var yAxis = actions.DiscreteActions[1] - 1; 
             var jumpButton = actions.DiscreteActions[2]; 
             var fireButton = actions.DiscreteActions[3];
-            // var newWeaponId = actions.DiscreteActions[4];
+            if (m_WormController.m_Weapons.Count > 1)
+            {
+                var newWeaponId = actions.DiscreteActions[4];
+            }
 
             switch (m_WormController.m_State.m_State)
             {
@@ -164,14 +167,19 @@ namespace WormComponents.Agents.Hard
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
                     m_WormController.m_ControllingSignals.m_Jump = jumpButton == 1;
                     m_WormController.m_ControllingSignals.m_Aim = fireButton == 1;
-                    // m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    if (m_WormController.m_Weapons.Count > 1)
+                    {
+                        m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    }
                     break;
                 case WormState.States.SHOOTING:
                     m_WormController.m_ControllingSignals.m_Aimning = xAxis;
                     m_WormController.m_ControllingSignals.m_PowerChanging = yAxis;
-                    // m_WormController.m_ControllingSignals.m_AimCancel = jumpButton == 1;
                     m_WormController.m_ControllingSignals.m_Fire = fireButton == 1;
-                    // m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    if (m_WormController.m_Weapons.Count > 1)
+                    {
+                        m_WormController.m_ControllingSignals.m_TargetWeaponId = newWeaponId;
+                    }
                     break;
                 case WormState.States.ESCAPING:
                     m_WormController.m_ControllingSignals.m_HorizontalMoving = xAxis;
@@ -199,7 +207,10 @@ namespace WormComponents.Agents.Hard
             discreteActions[1] = Input.GetAxis("Vertical") > 0f ? 2 : Input.GetAxis("Vertical") < 0f ? 0 : 1;
             discreteActions[2] = Input.GetButton("Jump") ? 1 : 0;
             discreteActions[3] = Input.GetButton("Fire1") ? 1 : 0;
-            // discreteActions[4] = GetNewWeaponIdFromInput();
+            if (m_WormController.m_Weapons.Count > 1)
+            {
+                discreteActions[4] = GetNewWeaponIdFromInput();
+            }
         }
         
         public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)

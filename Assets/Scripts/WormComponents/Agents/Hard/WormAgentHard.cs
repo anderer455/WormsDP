@@ -107,10 +107,19 @@ namespace WormComponents.Agents.Hard
             sensor.AddObservation(m_WormController.m_EnvironmentController.m_Timer.m_TimeLeft
                                   / m_WormController.m_EnvironmentController.m_Timer
                                       .m_TurnLength); // time to end of the phase
-            sensor.AddObservation((int)m_WormController.m_State.m_State); // current phase
             sensor.AddObservation(m_WormController.m_ActiveWeapon.transform.right); // weapon direction
             sensor.AddObservation(m_WormController.m_ActiveWeapon.m_Power); // weapon force
             sensor.AddObservation(m_WormController.m_GroundDetector.m_IsGrounded); // Is Grounded
+
+            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.IDLE); // current phase
+            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.MOVING); // current phase
+            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.SHOOTING); // current phase
+            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.ESCAPING); // current phase
+            
+            for (int i = 0; i < m_WormController.m_Weapons.Count; i++)
+            {
+                sensor.AddObservation(i == m_WormController.m_ControllingSignals.m_WeaponId);
+            }
             
             var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(20, 0.1f);
             foreach (var point in points)
