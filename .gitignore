@@ -32,7 +32,9 @@ Icon?
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
-[Bb]uilds/
+[Bb]uilds/*
+![Bb]uilds/WormsDP/
+[Bb]uilds/WormsDP/WormsDP_BurstDebugInformation_DoNotShip
 [Ll]ogs/
 UserSettings/
 MemoryCaptures/
