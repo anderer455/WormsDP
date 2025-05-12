@@ -141,11 +141,11 @@ behaviors:
       gail:
         strength: 1.0
         gamma: 0.99
-        demo_path: "Assets/Demonstrations/demo0.demo"
+        demo_path: "Assets/Demonstrations/mediumdemoflat.demo"
     behavioral_cloning:
       strength: 1.0
-      demo_path: "Assets/Demonstrations/demo0.demo"
-      steps: 1000000 #demo uses during 1m steps, then is not
+      demo_path: "Assets/Demonstrations/mediumdemoflat.demo"
+      steps: 1000000
     keep_checkpoints: 50
     max_steps: 50000000
     time_horizon: 128

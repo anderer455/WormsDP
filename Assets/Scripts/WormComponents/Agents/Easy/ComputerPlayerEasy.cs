@@ -30,7 +30,7 @@ namespace WormComponents.Agents.Easy
 
         private IEnumerator AssignEnemyWhenReady()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.001f);
             SetEnemy(RandomEnemy.GetRandomEnemy(m_WormController.GetColor()));
         }
     }

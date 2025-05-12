@@ -131,8 +131,10 @@ namespace WormComponents.Agents.Medium
             }
 
             for (; j < 20; j++)
+            {
                 sensor.AddObservation(0);
                 sensor.AddObservation(0);
+            }
         }
         
         public override void ApplyEnemyLayers(LayerMask lm)

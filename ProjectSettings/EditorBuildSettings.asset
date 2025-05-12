@@ -8,8 +8,101 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Easy/__TRAINING_SCENE (Easy) Castle.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Training/__TRAINING_SCENE_1_VS_1 (Hard) Castle.unity
     guid: 6b6bedd5f4efc00448d88760ac5fc1a2
+  - enabled: 1
+    path: Assets/Scenes/GameMenu.unity
+    guid: caffd44c9623a244ca26af5a6d8eec71
+  - enabled: 1
+    path: Assets/Scenes/PvP/PvP_1_VS_1 Castle.unity
+    guid: 930bce1a16951384abb39fdf3156631d
+  - enabled: 1
+    path: Assets/Scenes/PvP/PvP_1_VS_1 Flat.unity
+    guid: e619255dc10d97a4fac44349d2fcb157
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Castle (Easy).unity
+    guid: 6c014ba0d2b848b4cbbedda7596fd1db
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Castle (Medium).unity
+    guid: e0ad15d7916d3f24d9dd35c458ac3fb5
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Castle (Hard).unity
+    guid: 3060484a078a7fa43a877cba14743ebb
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Castle (Medium) Clon.unity
+    guid: 96d9f83c3956bdb44929b0b6cdeecf38
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Flat (Easy).unity
+    guid: aba70f1c9460d0440a1ab92b2a1fd1ef
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Flat (Medium).unity
+    guid: c12d517cf9c2c6d4d9348c413b56d35b
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Flat (Hard).unity
+    guid: 364fafd133a1b8f4d95362dc3c37fdc7
+  - enabled: 1
+    path: Assets/Scenes/PvC/PvC_1_VS_1 Flat (Medium) Clon.unity
+    guid: 4a08ad4af7a12994aa4edf9540344caf
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Easy).unity
+    guid: 80617a1484582b24cba534e6a9530f3a
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Easy) 1.unity
+    guid: 3e45cd8a480e2114bab3f86b55f51b0d
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Easy) 2.unity
+    guid: 86ea5f3ad8045d8428b4b4c787bc897a
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Medium).unity
+    guid: 243af51d7b787ba4ba7e67b07df0dd64
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Medium) 1.unity
+    guid: d5e0ec79b5de2914388efb2e3464ef78
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Hard).unity
+    guid: a2f54d35b89b7c4409ae727d025198a6
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Easy) 3.unity
+    guid: 78d0be938ef3e9547a79eb03caf3d386
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Medium) 2.unity
+    guid: 5605d34bf643ac04a850877ac2af41b4
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Hard) 1.unity
+    guid: 4820acd4cb14fdf4292703e9b47be65c
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Castle (Medium) Clon.unity
+    guid: 4531834a2e487b3469bb395892dad850
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Easy).unity
+    guid: 35fb4460ba8fc4244a94a7e57119d6a6
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Easy) 1.unity
+    guid: 773c4c9e5218fdd47a2d80a58831e320
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Easy) 2.unity
+    guid: 394c8cf03555b7043a80a26a98d3e5ea
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Medium).unity
+    guid: 9adb6146d385f62468e3e57289b15c54
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Medium) 1.unity
+    guid: 58fa4879e273eeb4f89c494ababe875a
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Hard).unity
+    guid: f597ebc22394afc4e84f1eccae770752
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Easy) 3.unity
+    guid: c2d53e945ab0e534cbb4b4f4bc3c0edd
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Medium) 2.unity
+    guid: c570d8d4cad6727449e254f956ce5e7e
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Hard) 1.unity
+    guid: f0e8f207d9bd8524cad1e37ab50e86d4
+  - enabled: 1
+    path: Assets/Scenes/CvC/CvC_1_VS_1 Flat (Medium) Clon.unity
+    guid: fd553e13aae83ba468ff362f1eed52db
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

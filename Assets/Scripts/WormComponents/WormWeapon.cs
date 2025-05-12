@@ -98,6 +98,14 @@ namespace WormComponents
                         float x = startPosition.x + initialVelocity.x * time;
                         float y = startPosition.y + initialVelocity.y * time;
                         points.Add(new Vector2(x, y));
+
+                        if (i == 1)
+                        {
+                            for (int j = 0; j < 18; j++)
+                            {
+                                points.Add(new Vector2(x, y));
+                            }
+                        }
                     }
                     break;
             }

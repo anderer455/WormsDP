@@ -82,14 +82,15 @@ namespace WormComponents.Agents.Easy
 
             sensor.AddObservation(m_WormController.m_EnvironmentController.m_Timer.m_TimeLeft 
                                   / m_WormController.m_EnvironmentController.m_Timer.m_TurnLength); // time to end of the phase
+            sensor.AddObservation((int)m_WormController.m_State.m_State); // current phase
             sensor.AddObservation(m_WormController.m_ActiveWeapon.transform.right); // weapon direction
             sensor.AddObservation(m_WormController.m_ActiveWeapon.m_Power); // weapon force
             sensor.AddObservation(m_WormController.m_GroundDetector.m_IsGrounded); // Is Grounded
 
-            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.IDLE); // current phase
-            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.MOVING); // current phase
-            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.SHOOTING); // current phase
-            sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.ESCAPING); // current phase
+            // sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.IDLE); // current phase
+            // sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.MOVING); // current phase
+            // sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.SHOOTING); // current phase
+            // sensor.AddObservation(m_WormController.m_State.m_State == WormState.States.ESCAPING); // current phase
             
             for (int i = 0; i < m_WormController.m_Weapons.Count; i++)
             {
@@ -99,20 +100,22 @@ namespace WormComponents.Agents.Easy
             var points = m_WormController.m_ActiveWeapon.CalculateTrajectory(m_WormController.m_ControllingSignals.m_WeaponId, 20, 0.1f);
             if (m_EnemyWormController != null)
             {
-                int i = 0;
+                int j = 0;
                 foreach (var point in points)
                 {
                     sensor.AddObservation(((Vector2)m_EnemyWormController.transform.position - point).magnitude);
                     Debug.DrawLine(m_WormController.m_ActiveWeapon.m_LaunchPoint.position, point);
-                    i++;
+                    j++;
                 }
                 
-                for (; i < 20; i++)
+                for (; j < 20; j++)
+                {
                     sensor.AddObservation(0);
+                }
             }
             else
             {
-                for (int i = 0; i <= 20; i++)
+                for (int k = 0; k < 20; k++)
                 {
                     sensor.AddObservation(0);
                 }
@@ -260,11 +263,11 @@ namespace WormComponents.Agents.Easy
             
                 // Jump.
                 actionMask.SetActionEnabled(2, 0, true); 
-                actionMask.SetActionEnabled(2, 1, false);
+                actionMask.SetActionEnabled(2, 1, true);
 
                 // Fire. 
                 actionMask.SetActionEnabled(3, 0, true); 
-                actionMask.SetActionEnabled(3, 1, true);
+                actionMask.SetActionEnabled(3, 1, false);
                 
                 // WeaponID
                 if (m_WormController.m_Weapons.Count > 1)
