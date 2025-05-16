@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ScriptableObjects;
 using WormComponents;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace EnvironmentControllers
 {
@@ -45,11 +46,7 @@ namespace EnvironmentControllers
                     OnTurnFinished?.Invoke(this);
                 }
 
-                #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-                #else
-                    UnityEngine.Application.Quit();
-                #endif
+                SceneManager.LoadScene("GameMenu");
             }
         }
         
